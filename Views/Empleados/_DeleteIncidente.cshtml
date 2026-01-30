@@ -1,0 +1,81 @@
+﻿@model RecursosHumanos.Models.ViewModels.Empleados.IncidenteDeleteVM
+
+<div class="reclutamiento-overlay show" id="incidenteOverlayDelete">
+
+    <div class="reclutamiento-modal">
+
+        <!-- HEADER -->
+        <div class="modal-header">
+            <h5>Confirmar eliminación</h5>
+            <button type="button"
+                    class="btn-close"
+                    onclick="IncidenteOverlayDelete.close()">
+            </button>
+        </div>
+
+        <!-- BODY -->
+        <form id="formDeleteIncidente"
+              asp-action="DeleteIncidente"
+              method="post">
+
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="IdPersona" />
+
+            <div class="modal-body">
+
+                <p class="mb-3">
+                    ¿Estás seguro de que deseas eliminar esta incidencia?
+                </p>
+
+                <div class="row g-3">
+
+                    <div class="col-md-12">
+                        <label class="form-label">Incidente</label>
+                        <input class="form-control"
+                               value="@Model.NombreIncidente"
+                               disabled />
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Descripción</label>
+                        <textarea class="form-control"
+                                  rows="2"
+                                  disabled>@Model.Descripcion</textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Razón</label>
+                        <input class="form-control"
+                               value="@Model.Razon"
+                               disabled />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Fecha</label>
+                        <input class="form-control"
+                               value="@Model.FechaIncidente.ToString("dd/MM/yyyy")"
+                               disabled />
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="modal-footer mt-4">
+                <button type="button"
+                        class="btn btn-secondary"
+                        onclick="IncidenteOverlayDelete.close()">
+                    Cancelar
+                </button>
+
+                <button type="submit"
+                        class="btn btn-danger">
+                    Eliminar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

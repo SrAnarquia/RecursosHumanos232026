@@ -1,0 +1,64 @@
+﻿/* =============================== FILTROS =============================== */
+.filter-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+    .filters input {
+        min-width: 180px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+    }
+
+/* =============================== ACCIONES =============================== */
+.actions a {
+    margin: 0 6px;
+    color: #1e3a8a;
+    font-size: 1.15rem;
+    text-decoration: none;
+}
+
+    .actions a:hover {
+        color: #2563eb;
+    }
+
+/* =============================== PAGINACIÓN =============================== */
+.pagination-container {
+    margin-top: 25px;
+}
+
+.pagination .page-link {
+    color: #1e3a8a;
+}
+
+.pagination .page-item.active .page-link {
+    color: white;
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.pagination .page-link:hover {
+    color: #ffffff;
+    background-color: #1e3a8a;
+}
+
+/* =============================== TABLA =============================== */
+.table-responsive {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}

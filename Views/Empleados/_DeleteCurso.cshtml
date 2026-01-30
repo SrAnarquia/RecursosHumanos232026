@@ -1,0 +1,90 @@
+﻿@model RecursosHumanos.Models.ViewModels.Empleados.CursoPersonaDeleteVM
+
+<div class="reclutamiento-overlay"
+     id="cursoOverlayDelete"
+     style="display:flex">
+
+    <div class="reclutamiento-modal">
+
+        <!-- HEADER -->
+        <div class="modal-header">
+            <h5>Confirmar eliminación</h5>
+            <button type="button"
+                    class="btn-close"
+                    onclick="CursoOverlayDelete.close()">
+            </button>
+        </div>
+
+        <!-- BODY -->
+        <form asp-action="DeleteCurso"
+              asp-controller="Empleados"
+              method="post"
+              id="formDeleteCurso">
+
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div class="modal-body">
+
+                <p class="mb-3">
+                    ¿Estás seguro de que deseas eliminar el siguiente curso?
+                </p>
+
+                <div class="row g-3">
+
+                    <div class="col-md-12">
+                        <label class="form-label">Curso</label>
+                        <input class="form-control"
+                               value="@Model.NombreCurso"
+                               disabled />
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Descripción</label>
+                        <input class="form-control"
+                               value="@Model.Descripcion"
+                               disabled />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Inicio</label>
+                        <input class="form-control"
+                               value="@Model.FechaInicio?.ToString("dd/MM/yyyy")"
+                               disabled />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Fin</label>
+                        <input class="form-control"
+                               value="@Model.FechaFinalizacion?.ToString("dd/MM/yyyy")"
+                               disabled />
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Estatus</label>
+                        <input class="form-control"
+                               value="@Model.Estatus"
+                               disabled />
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="modal-footer mt-4">
+                <button type="button"
+                        class="btn btn-secondary"
+                        onclick="CursoOverlayDelete.close()">
+                    Cancelar
+                </button>
+
+                <button type="submit"
+                        class="btn btn-danger">
+                    Eliminar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

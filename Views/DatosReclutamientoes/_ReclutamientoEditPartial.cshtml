@@ -1,0 +1,153 @@
+﻿@model RecursosHumanos.Models.ViewModels.Reclutamiento.ReclutamientoIndexVM
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<div class="reclutamiento-overlay show"
+     id="reclutamientoOverlayEdit"
+     style="display:@(Model.MostrarModal ? "flex" : "none")">
+     
+    <div class="reclutamiento-modal">
+
+        <!-- HEADER -->
+        <div class="modal-header">
+            <h5>
+                <i class="bi bi-pencil"></i> Editar candidato
+            </h5>
+            <button type="button"
+                    class="btn-close"
+                    onclick="ReclutamientoOverlayEdit.close()">
+            </button>
+        </div>
+
+        <!-- FORM -->
+        <form asp-action="Edit"
+              asp-controller="DatosReclutamientoes"
+              method="post">
+
+            <!-- ID OCULTO -->
+            <input type="hidden" asp-for="Nuevo.Id" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-2">
+            </div>
+
+            <div class="row g-3">
+
+                <!-- NOMBRE -->
+                <div class="col-md-12">
+                    <label asp-for="Nuevo.NombreCompleto"></label>
+                    <input asp-for="Nuevo.NombreCompleto"
+                           class="form-control" />
+                    <span asp-validation-for="Nuevo.NombreCompleto"
+                          class="text-danger"></span>
+                </div>
+
+                <!-- TELÉFONO -->
+                <div class="col-md-6">
+                    <label asp-for="Nuevo.Telefono"></label>
+                    <input asp-for="Nuevo.Telefono"
+                           class="form-control" />
+                </div>
+
+                <!-- EMPRESA -->
+                <div class="col-md-6">
+                    <label>Empresa</label>
+                    <select asp-for="Nuevo.IdEmpresa"
+                            asp-items="Model.Empresas"
+                            class="form-select">
+                    </select>
+                </div>
+
+                <!-- BASE -->
+                <div class="col-md-6">
+                    <label>Base</label>
+                    <select asp-for="Nuevo.IdBase"
+                            asp-items="Model.Bases"
+                            class="form-select">
+                    </select>
+                </div>
+
+                <!-- FUENTE -->
+                <div class="col-md-6">
+                    <label>Fuente</label>
+                    <select asp-for="Nuevo.IdFuente"
+                            asp-items="Model.Fuentes"
+                            class="form-select">
+                    </select>
+                </div>
+
+                <!-- ESTATUS -->
+                <div class="col-md-6">
+                    <label>Estatus</label>
+                    <select asp-for="Nuevo.IdEstatus"
+                            asp-items="Model.Estatus"
+                            class="form-select">
+                    </select>
+                </div>
+
+                <!-- POSICIÓN -->
+                <div class="col-md-6">
+                    <label>Posición</label>
+                    <select asp-for="Nuevo.IdPosicion"
+                            asp-items="Model.Posiciones"
+                            class="form-select">
+                    </select>
+                </div>
+
+                <!-- SEXO -->
+                <div class="col-md-6">
+                    <label>Sexo</label>
+                    <select asp-for="Nuevo.IdSexo"
+                            asp-items="Model.Sexos"
+                            class="form-select">
+                    </select>
+                </div>
+
+                <!-- RECLUTADOR -->
+                <div class="col-md-12">
+                    <label>Reclutador</label>
+                    <select asp-for="Nuevo.IdReclutador"
+                            asp-items="Model.Reclutadores"
+                            class="form-select">
+                    </select>
+                </div>
+
+                <!-- COMENTARIOS -->
+                <div class="col-md-12">
+                    <label asp-for="Nuevo.Comentarios"></label>
+                    <textarea asp-for="Nuevo.Comentarios"
+                              class="form-control">
+                    </textarea>
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+            <!-- 
+            <div class="modal-footer mt-4">
+                <button type="button"
+                        class="btn btn-secondary"
+                        onclick="ReclutamientoOverlay.close()">
+                    Cancelar
+                </button>
+
+                <button type="submit"
+                        class="btn btn-primary">
+                    Guardar cambios
+                </button>
+            </div>
+            -->
+
+            <div class="modal-footer mt-4">
+                <button type="button" class="btn btn-secondary" onclick="ReclutamientoOverlayEdit.close()">
+                    Cancelar
+                </button>
+                <button type="submit" class="btn btn-success">
+                    Guardar
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>

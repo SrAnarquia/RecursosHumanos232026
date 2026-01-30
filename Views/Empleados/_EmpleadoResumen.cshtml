@@ -1,0 +1,93 @@
+﻿@model RecursosHumanos.Models.ViewModels.Empleados.EmpleadoResumenVM
+
+
+
+<div class="reclutamiento-overlay" id="empleadoOverlay">
+    <div class="reclutamiento-modal">
+        <div class="modal-header">
+            <h5>
+                <i class="bi bi-person-badge"></i> Resumen del empleado
+            </h5>
+
+            <button type="button"
+                    class="btn-close"
+                    onclick="EmpleadoResumen.close()">
+            </button>
+        </div>
+
+
+        <div class="filter-card mb-4">
+            <div class="d-flex align-items-center">
+
+                @if (Model.FotoPersonal != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.FotoPersonal);
+                    <img src="data:image/jpeg;base64,@base64"
+                         class="rounded-circle me-3"
+                         style="width:70px;height:70px;object-fit:cover;" />
+                }
+                else
+                {
+                    <i class="bi bi-person-circle fs-1 text-muted me-3"></i>
+                }
+
+                <div>
+                    <h5 class="mb-0">@Model.Nombre</h5>
+                    <small class="text-muted">
+                        @Model.Departamento |
+                        ID ZAMlIS: @Model.IdPersonal
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3">
+
+            <!-- CURSOS -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h6><i class="bi bi-mortarboard"></i> Cursos</h6>
+                        <h3>@Model.TotalCursos</h3>
+                        <small class="text-success">@Model.CursosTerminados Terminados</small><br />
+                        <small class="text-warning">@Model.CursosEnProceso En proceso</small><br />
+                        <small class="text-danger">@Model.CursosSinIniciar Sin iniciar</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INCIDENTES -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h6><i class="bi bi-exclamation-triangle"></i> Incidentes</h6>
+                        <h3>@Model.TotalIncidentes</h3>
+                        <small>
+                            Último:
+                            @(Model.UltimoIncidente?.ToString("dd/MM/yyyy") ?? "N/A")
+                        </small><br />
+                        <small class="text-danger">
+                            Más común: @Model.RazonMasComun
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VACACIONES -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h6><i class="bi bi-umbrella"></i> Vacaciones</h6>
+                        <h3>@Model.DiasVacacionesTomados días</h3>
+                        <small>@Model.TotalSolicitudesVacaciones solicitudes</small><br />
+                        <small>
+                            Última:
+                            @(Model.UltimaVacacion?.ToString("MMM yyyy") ?? "N/A")
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

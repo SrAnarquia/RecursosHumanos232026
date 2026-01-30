@@ -1,0 +1,115 @@
+﻿@model RecursosHumanos.Models.ViewModels.Catalogos.CatalogoCursosIndexVM
+
+
+@section Styles {
+    <link href="~/css/StyleCatalogos.css" rel="stylesheet" />
+    <link href="~/css/StyleCatalogosPartial.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/js/CatalogoCursosOverlayCreate.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<!-- ===================== TÍTULO ===================== -->
+<div class="mb-4">
+    <h2 class="fw-bold">
+        <i class="bi bi-journal-bookmark"></i> Base de datos Entrenamientos
+    </h2>
+</div>
+
+<!-- ===================== FILTROS ===================== -->
+<div class="filter-card mb-4">
+    <form method="get" class="filters">
+
+        <input type="text" name="Nombre" value="@Model.Nombre" placeholder="Nombre del curso" />
+
+        <select name="FiltroDepartamento" asp-items="Model.Departamentos">
+            <option value="">Departamento</option>
+        </select>
+
+        <select name="FiltroDepartamento" asp-items="Model.Niveles">
+            <option value="">Nivel</option>
+        </select>
+
+        <select name="FiltroDepartamento" asp-items="Model.TiposCurso">
+            <option value="">Tipo Curso</option>
+        </select>
+      
+    
+        <input type="date" name="FechaDesde" value="@(Model.FechaDesde?.ToString("yyyy-MM-dd"))" />
+        <input type="date" name="FechaHasta" value="@(Model.FechaHasta?.ToString("yyyy-MM-dd"))" />
+
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-search"></i> Filtrar
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Limpiar
+        </a>
+    </form>
+</div>
+
+<!-- ===================== BOTÓN CREAR ===================== -->
+<div class="d-flex justify-content-end mb-3">
+    <button type="button" class="btn btn-success" onclick="CatalogoCursosOverlayCreate.open()">
+        <i class="bi bi-plus-circle"></i> Crear
+    </button>
+</div>
+
+<!-- ===================== TABLA ===================== -->
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Departamento</th>
+                <th>Nivel</th>
+                <th>Tipo</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Datos.Any())
+            {
+                foreach (var item in Model.Datos)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.IdDepartamentoNavigation?.Nombre</td>
+                        <td>@item.IdNivelNavigation?.Nombre</td>
+                        <td>@item.IdTipoCursoNavigation?.Nombre</td>
+                        <td>@item.FechaInicio?.ToString("dd/MM/yyyy")</td>
+                        <td>@item.FechaFinalizacion?.ToString("dd/MM/yyyy")</td>
+                        <td class="text-center actions">
+                            <a href="javascript:void(0)" onclick="CatalogoCursosOverlayDetails.open(@item.Id)">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            <a href="javascript:void(0)" onclick="CatalogoCursosOverlayEdit.open(@item.Id)">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="javascript:void(0)" onclick="CatalogoCursosOverlayDelete.open(@item.Id)">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        No se encontraron registros
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@await Html.PartialAsync(
+"_EntrenamientoCrearPartial",
+    Model.Nuevo
+)
+

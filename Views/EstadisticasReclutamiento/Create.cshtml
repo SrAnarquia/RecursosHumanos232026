@@ -1,0 +1,72 @@
+﻿@model RecursosHumanos.Models.DatosReclutamiento
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>DatosReclutamiento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreCompleto" class="control-label"></label>
+                <input asp-for="NombreCompleto" class="form-control" />
+                <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comentarios" class="control-label"></label>
+                <input asp-for="Comentarios" class="form-control" />
+                <span asp-validation-for="Comentarios" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdEmpresa" class="control-label"></label>
+                <select asp-for="IdEmpresa" class ="form-control" asp-items="ViewBag.IdEmpresa"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdBase" class="control-label"></label>
+                <select asp-for="IdBase" class ="form-control" asp-items="ViewBag.IdBase"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdFuente" class="control-label"></label>
+                <select asp-for="IdFuente" class ="form-control" asp-items="ViewBag.IdFuente"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdEstatus" class="control-label"></label>
+                <select asp-for="IdEstatus" class ="form-control" asp-items="ViewBag.IdEstatus"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdPosicion" class="control-label"></label>
+                <select asp-for="IdPosicion" class ="form-control" asp-items="ViewBag.IdPosicion"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdSexo" class="control-label"></label>
+                <select asp-for="IdSexo" class ="form-control" asp-items="ViewBag.IdSexo"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdReclutador" class="control-label"></label>
+                <select asp-for="IdReclutador" class ="form-control" asp-items="ViewBag.IdReclutador"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

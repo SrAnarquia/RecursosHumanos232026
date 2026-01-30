@@ -1,0 +1,73 @@
+﻿@model RecursosHumanos.Models.ViewModels.Vacaciones.VacacionCreateVM
+
+<div class="reclutamiento-overlay" id="vacacionesOverlay">
+    <div class="reclutamiento-modal">
+
+        <div class="modal-header">
+            <h5>
+                <i class="bi bi-calendar-plus"></i> Nueva solicitud de vacaciones
+            </h5>
+            <button type="button"
+                    class="btn-close"
+                    onclick="VacacionesOverlayCreate.close()">
+            </button>
+        </div>
+
+        <form id="formCrearVacacion" asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="Nuevo.Nombre"></label>
+                    <input asp-for="Nuevo.Nombre" class="form-control" />
+                    <span asp-validation-for="Nuevo.Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6"> 
+                    <label asp-for="Nuevo.Departamento"></label>
+                    <input asp-for="Nuevo.Departamento" class="form-control" />
+                    <span asp-validation-for="Nuevo.Departamento" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Razón</label>
+                    <select asp-for="Nuevo.IdRazon"
+                            asp-items="Model.Razones"
+                            class="form-select">
+                        <option value=""></option>
+                    </select>
+                    <span asp-validation-for="Nuevo.IdRazon" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Nuevo.FechaInicio"></label>
+                    <input asp-for="Nuevo.FechaInicio" type="date" class="form-control" />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Nuevo.FechaFinalizacion"></label>
+                    <input asp-for="Nuevo.FechaFinalizacion" type="date" class="form-control" />
+                </div>
+
+                <div class="col-md-12">
+                    <label asp-for="Nuevo.Detalles"></label>
+                    <textarea asp-for="Nuevo.Detalles" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer mt-4">
+                <button type="button"
+                        class="btn btn-secondary"
+                        onclick="VacacionesOverlayCreate.close()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-success">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

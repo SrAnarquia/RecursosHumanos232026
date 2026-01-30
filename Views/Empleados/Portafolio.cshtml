@@ -1,0 +1,227 @@
+﻿@model RecursosHumanos.Models.ViewModels.Empleados.PersonalPortafolioVM
+
+@section Styles {
+    <link href="~/css/styleReclutamiento.css" rel="stylesheet" />
+    <link href="~/css/styleReclutamientoPartial.css" rel="stylesheet" />
+    <link href="~/css/StyleCrearCurso.css" rel="stylesheet" />
+
+}
+
+@section Scripts {
+    <script src="~/js/EmpleadoCursoOverlayCreate.js"></script>
+    <script src="~/js/EmpleadoCursoOverlayEdit.js"></script>
+    <script src="~/js/EmpleadoCursoOverlayDelete.js"></script>
+    <script src="~/js/EmpleadoCursoOverlayDetails.js"></script>
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<!-- ===================== TÍTULO ===================== -->
+<div class="mb-4">
+    <a asp-action="Index"
+       asp-controller="Empleados"
+       class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left fs-4"></i>
+    </a>
+
+    <h2 class="fw-bold mb-0">
+        Portafolio de cursos
+    </h2>
+</div>
+<!-- ===================== CARD PERSONA ===================== -->
+<div class="filter-card mb-4">
+    <div class="d-flex align-items-center">
+
+        @if (Model.FotoPersonal != null)
+        {
+            var base64 = Convert.ToBase64String(Model.FotoPersonal);
+            <img src="data:image/jpeg;base64,@base64"
+                 class="rounded-circle me-3"
+                 style="width:70px;height:70px;object-fit:cover;" />
+        }
+        else
+        {
+            <i class="bi bi-person-circle fs-1 text-muted me-3"></i>
+        }
+
+        <div class="flex-grow-1">
+            <h5 class="mb-0">@Model.Nombre</h5>
+            <small class="text-muted">@Model.Departamento | @Model.TipoEmpleado</small><br />
+            <small class="text-muted">@Model.Email | @Model.Telefono</small>
+        </div>
+
+        <button type="button" class="btn btn-success"
+                onclick="CursoOverlay.open(@Model.IdPersonal)">
+            <i class="bi bi-plus-circle"></i> Agregar curso
+        </button>
+    </div>
+</div>
+
+<!-- ===================== FILTROS ===================== -->
+<div class="filter-card mb-4">
+    <form method="get" class="filters">
+
+        <input type="text" name="Curso" value="@Model.FiltroCurso" placeholder="Nombre del curso" />
+
+        <input type="date" name="FechaDesde"
+               value="@(Model.FechaDesde?.ToString("yyyy-MM-dd"))" />
+
+        <input type="date" name="FechaHasta"
+               value="@(Model.FechaHasta?.ToString("yyyy-MM-dd"))" />
+
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-search"></i> Filtrar
+        </button>
+
+        <a asp-action="Portafolio" asp-route-id="@Model.IdPersonal"
+           class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Limpiar
+        </a>
+
+    </form>
+</div>
+
+<div id="modalCursosContainer"></div>
+
+<!-- ===================== TABLA ===================== -->
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Curso</th>
+                <th>Descripción</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Estatus</th>
+                <th class="text-center">Diploma</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Cursos.Any())
+            {
+                foreach (var c in Model.Cursos)
+                {
+                    <tr>
+                        <td>@c.NombreCurso</td>
+                        <td>@c.Descripcion</td>
+                        <td>@c.FechaInicio?.ToString("dd/MM/yyyy")</td>
+                        <td>@c.FechaFinalizacion?.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @{
+                                var badgeClass = c.Estatus switch
+                                {
+                                    "TERMINADO" => "bg-success",
+                                    "DETENIDO" => "bg-danger",
+                                    "EN PROCESO" => "bg-primary",
+                                    "SIN INICIAR" => "bg-secondary",
+                                    _ => "bg-secondary"
+                                };
+                            }
+
+                            <span class="badge @badgeClass">
+                                @c.Estatus
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            @if (!string.IsNullOrEmpty(c.Diploma))
+                            {
+                                <a href="@c.Diploma" target="_blank">Ver diploma</a>
+                            }
+
+                        </td>
+                        <td class="text-center actions">
+                            <a href="javascript:void(0)"
+                               onclick="CursoOverlayDetails.open(@c.Id)"
+                               title="Ver">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            <a href="javascript:void(0)"
+                               onclick="CursoOverlayEdit.edit(@c.Id)"
+                               title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+
+                            <a href="javascript:void(0)"
+                               onclick="CursoOverlayDelete.open(@c.Id)"
+                               title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        Sin cursos asignados
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- ===================== PAGINACIÓN ===================== -->
+@if (Model.TotalPaginas > 1)
+{
+    int paginasAMostrar = 5;
+    int paginaActual = Model.PaginaActual;
+    int totalPaginas = Model.TotalPaginas;
+
+    int inicio = paginaActual - (paginasAMostrar / 2);
+    if (inicio < 1) inicio = 1;
+
+    int fin = inicio + paginasAMostrar - 1;
+    if (fin > totalPaginas) fin = totalPaginas;
+    if (fin - inicio < paginasAMostrar - 1) inicio = Math.Max(1, fin - paginasAMostrar + 1);
+
+    <nav class="pagination-container">
+        <ul class="pagination justify-content-center align-items-center">
+
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <a class="page-link"
+                   asp-route-pagina="1"
+                   asp-route-id="@Model.IdPersonal">
+                    <i class="bi bi-chevron-double-left"></i>
+                </a>
+            </li>
+
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <a class="page-link"
+                   asp-route-pagina="@(paginaActual - 1)"
+                   asp-route-id="@Model.IdPersonal">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+
+            @for (int i = inicio; i <= fin; i++)
+            {
+                <li class="page-item @(i == paginaActual ? "active" : "")">
+                    <a class="page-link"
+                       asp-route-pagina="@i"
+                       asp-route-id="@Model.IdPersonal">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <a class="page-link"
+                   asp-route-pagina="@(paginaActual + 1)"
+                   asp-route-id="@Model.IdPersonal">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <a class="page-link"
+                   asp-route-pagina="@totalPaginas"
+                   asp-route-id="@Model.IdPersonal">
+                    <i class="bi bi-chevron-double-right"></i>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+}

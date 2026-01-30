@@ -1,0 +1,164 @@
+﻿@model RecursosHumanos.Models.ViewModels.Vacaciones.VacacionIndexVM
+
+@{
+    ViewData["Title"] = "Aprobaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script src="~/js/VacacionesOverlayAprobacion.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}
+
+@section Styles {
+    <link href="~/css/StyleReclutamiento.css" rel="stylesheet" />
+    <link href="~/css/styleReclutamientoPartial.css" rel="stylesheet" />
+}
+
+<div id="vacacionesOverlayContainer"></div>
+
+<!-- ===================== TÍTULO ===================== -->
+<div class="mb-4">
+    <h2 class="fw-bold">
+        <i class="bi bi-check2-square"></i> Aprobaciones de Vacaciones
+    </h2>
+</div>
+
+<!-- ===================== FILTROS ===================== -->
+<div class="filter-card mb-4">
+    <form method="get" class="filters">
+
+        <input type="text" name="Nombre" value="@Model.Nombre" placeholder="Nombre del empleado" />
+        <input type="text" name="Departamento" value="@Model.Departamento" placeholder="Departamento" />
+        <input type="date" name="FechaDesde" value="@(Model.FechaDesde?.ToString("yyyy-MM-dd"))" />
+        <input type="date" name="FechaHasta" value="@(Model.FechaHasta?.ToString("yyyy-MM-dd"))" />
+
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-search"></i> Filtrar
+        </button>
+
+        <a asp-action="Aprobacion" class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Limpiar
+        </a>
+
+    </form>
+</div>
+
+<!-- ===================== TABLA ===================== -->
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Departamento</th>
+                <th>Fecha inicio</th>
+                <th>Fecha fin</th>
+                <th>Aprobación</th>
+                <th>Razón</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Datos != null && Model.Datos.Any())
+            {
+                foreach (var item in Model.Datos)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.Departamento</td>
+                        <td>@item.FechaInicio?.ToString("dd/MM/yyyy")</td>
+                        <td>@item.FechaFinalizacion?.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @(item.IdAprobadoNavigation != null && item.IdAprobadoNavigation.Estatus == true
+                                                ? "Aprobado"
+                                                : "Pendiente")
+                        </td>
+                        <td>@item.IdRazonNavigation?.Razon</td>
+                        <td class="text-center actions">
+
+                            <!-- Botón detalles (ojito) -->
+                            <a asp-action="Details" asp-route-id="@item.Id" title="Detalles">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            <!-- Botones de aprobar/rechazar -->
+                            @if (item.IdAprobadoNavigation == null || item.IdAprobadoNavigation.Estatus != true)
+                            {
+                                <a href="javascript:void(0);"
+                                   onclick="VacacionesOverlayAprobar.open(@item.Id)"
+                                   class="text-success mx-1"
+                                   title="Aprobar">
+                                    <i class="bi bi-check-circle"></i>
+                                </a>
+
+                                <a href="javascript:void(0);"
+                                   onclick="rechazarSolicitud(@item.Id)"
+                                   class="text-danger mx-1"
+                                   title="Rechazar">
+                                    <i class="bi bi-x-circle"></i>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        No se encontraron registros
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- ===================== PAGINACIÓN ===================== -->
+@if (Model.TotalPaginas > 1)
+{
+    int paginasAMostrar = 5;
+    int paginaActual = Model.PaginaActual;
+    int totalPaginas = Model.TotalPaginas;
+    int inicio = paginaActual - (paginasAMostrar / 2);
+    if (inicio < 1) inicio = 1;
+    int fin = inicio + paginasAMostrar - 1;
+    if (fin > totalPaginas) fin = totalPaginas;
+
+    <nav class="pagination-container">
+        <ul class="pagination justify-content-center align-items-center">
+
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <a class="page-link" asp-route-pagina="1">
+                    <i class="bi bi-chevron-double-left"></i>
+                </a>
+            </li>
+
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <a class="page-link" asp-route-pagina="@(paginaActual - 1)">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+
+            @for (int i = inicio; i <= fin; i++)
+            {
+                <li class="page-item @(i == paginaActual ? "active" : "")">
+                    <a class="page-link" asp-route-pagina="@i">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <a class="page-link" asp-route-pagina="@(paginaActual + 1)">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <a class="page-link" asp-route-pagina="@totalPaginas">
+                    <i class="bi bi-chevron-double-right"></i>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+}

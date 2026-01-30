@@ -1,0 +1,71 @@
+﻿@model RecursosHumanos.Models.ViewModels.Empleados.IncidenteCreateVM
+
+<div class="reclutamiento-overlay show" id="incidenteOverlay">
+    <div class="reclutamiento-modal">
+        <h5 class="mb-3">
+            <i class="bi bi-exclamation-triangle"></i> Nueva incidencia
+        </h5>
+
+        <form id="formIncidente"
+              asp-action="CreateIncidente"
+              method="post"
+              enctype="multipart/form-data">
+
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="IdPersona" />
+
+            <div class="mb-3">
+                <label class="form-label">Incidente</label>
+                <input asp-for="NombreIncidente" class="form-control" />
+                <span asp-validation-for="NombreIncidente" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                <textarea asp-for="Descripcion"
+                          class="form-control"
+                          rows="3"></textarea>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Razón</label>
+                <select asp-for="IdRazon"
+                        asp-items="Model.Razones"
+                        class="form-select">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="IdRazon" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Fecha</label>
+                <input asp-for="FechaIncidente" type="date" class="form-control" />
+                <span asp-validation-for="FechaIncidente" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Evidencia</label>
+
+                <input asp-for="EvidenciaFile"
+                       type="file"
+                       class="form-control"
+                       accept=".png,.jpg,.jpeg,.mp4" />
+
+                <span asp-validation-for="EvidenciaFile" class="text-danger"></span>
+            </div>
+
+            <div class="text-end">
+                <button type="button"
+                        class="btn btn-secondary"
+                        onclick="IncidenteOverlay.close()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-danger">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+﻿@model RecursosHumanos.Models.ViewModels.Catalogos.CatalogoCursoCreateVM
+
+<div class="catalogo-overlay"
+     id="catalogoCursosCreateOverlay"
+     style="display:none">
+
+    <div class="catalogo-modal">
+
+        <!-- HEADER -->
+        <div class="modal-header">
+            <h5><i class="bi bi-plus-circle"></i> Nuevo curso</h5>
+            <button type="button"
+                    class="btn-close"
+                    onclick="CatalogoCursosOverlayCreate.close()"></button>
+        </div>
+
+        <!-- FORM -->
+        <form asp-action="Create"
+              asp-controller="CatalogoCursos"
+              method="post"
+              enctype="multipart/form-data">
+
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+            <div class="row g-3">
+
+                <!-- Nombre -->
+                <div class="col-md-12">
+                    <label asp-for="Nombre"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <!-- Descripción -->
+                <div class="col-md-12">
+                    <label asp-for="Descripcion"></label>
+                    <textarea asp-for="Descripcion" class="form-control"></textarea>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <!-- Departamento -->
+                <div class="col-md-4">
+                    <label asp-for="IdDepartamento"></label>
+                    <select asp-for="IdDepartamento"
+                            asp-items="Model.Departamentos"
+                            class="form-select">
+                        <option value="">-- Seleccione --</option>
+                    </select>
+                    <span asp-validation-for="IdDepartamento" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="IdNivel"></label>
+                    <select asp-for="IdNivel"
+                            asp-items="Model.Niveles"
+                            class="form-select">
+                        <option value="">-- Seleccione --</option>
+                    </select>
+                    <span asp-validation-for="IdNivel" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="IdTipoCurso"></label>
+                    <select asp-for="IdTipoCurso"
+                            asp-items="Model.TiposCurso"
+                            class="form-select">
+                        <option value="">-- Seleccione --</option>
+                    </select>
+                    <span asp-validation-for="IdTipoCurso" class="text-danger"></span>
+                </div>
+
+
+                <!-- Fechas -->
+                <div class="col-md-4">
+                    <label asp-for="FechaInicio"></label>
+                    <input asp-for="FechaInicio" type="date" class="form-control" />
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="FechaFinalizacion"></label>
+                    <input asp-for="FechaFinalizacion" type="date" class="form-control" />
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="FechaExpiracion"></label>
+                    <input asp-for="FechaExpiracion" type="date" class="form-control" />
+                </div>
+
+                <!-- Diploma -->
+                <div class="col-md-12">
+                    <label asp-for="DiplomaFile"></label>
+
+                    <div class="catalogo-file-upload d-flex align-items-center gap-2">
+                        <label class="file-btn">
+                            <i class="bi bi-file-earmark-text"></i>
+                            <span>Elegir archivo</span>
+                            <input asp-for="DiplomaFile"
+                                   type="file"
+                                   accept=".pdf,.jpg,.jpeg,.png" />
+                        </label>
+
+                        <div class="file-name text-truncate" id="fileName">
+                            Ningún archivo seleccionado
+                        </div>
+                    </div>
+
+                    <span asp-validation-for="DiplomaFile" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="modal-footer mt-4">
+                <button type="button"
+                        class="btn btn-secondary"
+                        onclick="CatalogoCursosOverlayCreate.close()">
+                    Cancelar
+                </button>
+                <button type="submit" class="btn btn-success">
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

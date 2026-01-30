@@ -1,0 +1,74 @@
+﻿@model RecursosHumanos.Models.ViewModels.Empleados.CursoPersonaCreateVM
+
+<div id="cursoOverlay" class="reclutamiento-overlay show">
+
+    <div class="reclutamiento-modal">
+
+        <div class="modal-header">
+            <h5>Agregar curso</h5>
+            <button type="button" class="btn-close" onclick="CursoOverlay.close()"></button>
+        </div>
+
+        <form asp-action="CreateCurso" asp-controller="Empleados" method="post" id="formCurso">
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="IdPersona" />
+
+            <div class="row g-3">
+
+                <div class="col-md-12">
+                    <label>Curso</label>
+                    <input asp-for="NombreCurso" class="form-control" />
+                    <span asp-validation-for="NombreCurso" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Descripción</label>
+                    <textarea asp-for="Descripcion" class="form-control"></textarea>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Inicio</label>
+                    <input asp-for="FechaInicio" type="date" class="form-control" />
+                    <span asp-validation-for="FechaInicio" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Fin</label>
+                    <input asp-for="FechaFinalizacion" type="date" class="form-control" />
+                    <span asp-validation-for="FechaFinalizacion" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Estatus</label>
+                    <select asp-for="IdEstatus" asp-items="Model.Estatus" class="form-select">
+                        <option value=""></option> <!-- Blank item -->
+                    </select>
+                    <span asp-validation-for="IdEstatus" class="text-danger"></span>
+                </div>
+
+
+                <div class="col-md-12">
+                    <label>Diploma</label>
+
+                    <input asp-for="DiplomaFile" type="file"
+                           class="form-control"
+                           accept=".pdf,.png,.jpg,.jpeg" />
+
+                    <span asp-validation-for="DiplomaFile" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="modal-footer mt-3">
+                <button type="button" class="btn btn-secondary" onclick="CursoOverlay.close()">Cancelar</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+
+        </form>
+
+        <partial name="_ValidationScriptsPartial" />
+
+    </div>
+</div>

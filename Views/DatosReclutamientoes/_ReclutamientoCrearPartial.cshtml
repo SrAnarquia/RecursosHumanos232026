@@ -1,0 +1,87 @@
+﻿@model RecursosHumanos.Models.ViewModels.Reclutamiento.ReclutamientoIndexVM
+
+<div class="reclutamiento-overlay"
+     id="reclutamientoOverlay"
+     style="display:@(Model.MostrarModal ? "flex" : "none")">
+
+    <div class="reclutamiento-modal">
+
+        <div class="modal-header">
+            <h5><i class="bi bi-person-plus"></i> Nuevo candidato</h5>
+            <button type="button" class="btn-close" onclick="ReclutamientoOverlayCreate.close()"></button>
+        </div>
+
+        <form asp-action="Create" asp-controller="DatosReclutamientoes" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <label asp-for="Nuevo.NombreCompleto"></label>
+                    <input asp-for="Nuevo.NombreCompleto" class="form-control" />
+                    <span asp-validation-for="Nuevo.NombreCompleto" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Nuevo.Telefono"></label>
+                    <input asp-for="Nuevo.Telefono" class="form-control" />
+                    <span asp-validation-for="Nuevo.Telefono" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Empresas"></label>
+                    <select asp-for="Nuevo.IdEmpresa" asp-items="Model.Empresas" class="form-select"></select>
+                    <span asp-validation-for="Nuevo.IdEmpresa" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Bases"></label>
+                    <select asp-for="Nuevo.IdBase" asp-items="Model.Bases" class="form-select"></select>
+                    <span asp-validation-for="Nuevo.IdBase" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Fuentes"></label>
+                    <select asp-for="Nuevo.IdFuente" asp-items="Model.Fuentes" class="form-select"></select>
+                    <span asp-validation-for="Nuevo.IdFuente" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Estatus"></label>
+                    <select asp-for="Nuevo.IdEstatus" asp-items="Model.Estatus" class="form-select"></select>
+                    <span asp-validation-for="Nuevo.IdEstatus" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Posiciones"></label>
+                    <select asp-for="Nuevo.IdPosicion" asp-items="Model.Posiciones" class="form-select"></select>
+                    <span asp-validation-for="Nuevo.IdPosicion" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Sexos"></label>
+                    <select asp-for="Nuevo.IdSexo" asp-items="Model.Sexos" class="form-select"></select>
+                    <span asp-validation-for="Nuevo.IdSexo" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label asp-for="Reclutadores"></label>
+                    <select asp-for="Nuevo.IdReclutador" asp-items="Model.Reclutadores" class="form-select"></select>
+                    <span asp-validation-for="Nuevo.IdReclutador" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label asp-for="Nuevo.Comentarios"></label>
+                    <textarea asp-for="Nuevo.Comentarios" class="form-control"></textarea>
+                    <span asp-validation-for="Nuevo.Comentarios" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="modal-footer mt-4">
+                <button type="button" class="btn btn-secondary" onclick="ReclutamientoOverlayCreate.close()">
+                    Cancelar
+                </button>
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

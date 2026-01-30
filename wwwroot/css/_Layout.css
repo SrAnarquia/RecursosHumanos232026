@@ -1,0 +1,277 @@
+﻿/* ===============================
+   BASE
+================================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+/* ===============================
+   STRUCTURE
+================================= */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===============================
+   SIDEBAR
+================================= */
+.sidebar {
+    width: 240px;
+    background: linear-gradient(180deg, #1e3a8a, #2563eb);
+    color: #ffffff;
+    transition: width 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+    .sidebar.collapsed {
+        width: 70px;
+    }
+
+/* Header sidebar */
+.sidebar-header {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-toggle {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Menu */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    color: #e0e7ff;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+    .menu-item i {
+        font-size: 18px;
+    }
+
+    .menu-item span {
+        white-space: nowrap;
+    }
+
+    .menu-item:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+    }
+
+    .menu-item.active {
+        background-color: rgba(255, 255, 255, 0.25);
+        font-weight: 600;
+    }
+
+/* Ocultar texto al colapsar */
+.sidebar.collapsed .menu-item span {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+/* ===============================
+   MAIN CONTENT
+================================= */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.25s ease;
+}
+
+/* ===============================
+   TOPBAR
+================================= */
+.topbar {
+    height: 56px;
+    background-color: #4c4f6a;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.topbar-title h6 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.btn-logout {
+    background-color: #ffffff;
+    color: #1e3a8a;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: none;
+    font-size: 0.85rem;
+}
+
+    .btn-logout:hover {
+        background-color: #e0e7ff;
+        color: #1e3a8a;
+    }
+
+/* ===============================
+   CONTENT
+================================= */
+.content {
+    padding: 24px;
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        z-index: 1000;
+        height: 100%;
+    }
+
+    .main-content {
+        margin-left: 70px;
+    }
+}
+
+/* =============================== SUBMENUS =============================== */
+
+.menu-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+    .menu-toggle .arrow {
+        margin-left: auto;
+        transition: transform 0.25s ease;
+    }
+
+/* Submenu */
+.submenu {
+    list-style: none;
+    margin: 0;
+    padding-left: 55px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+    .submenu li a {
+        display: block;
+        padding: 8px 0;
+        font-size: 0.85rem;
+        color: #e0e7ff;
+        text-decoration: none;
+    }
+
+        .submenu li a:hover {
+            color: #ffffff;
+        }
+
+/* Activo */
+.menu-group.active .submenu {
+    max-height: 300px;
+}
+
+.menu-group.active .arrow {
+    transform: rotate(180deg);
+}
+
+/* Sidebar colapsado */
+.sidebar.collapsed .submenu,
+.sidebar.collapsed .arrow {
+    display: none;
+}
+
+/***********************************/
+/***********************************/
+/*Reclutamiento - Index*/
+
+
+
+
+/* =============================== FILTROS =============================== */
+.filter-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+    .filters input {
+        min-width: 180px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+    }
+
+/* =============================== ACCIONES =============================== */
+.actions a {
+    margin: 0 6px;
+    color: #1e3a8a;
+    font-size: 1.15rem;
+    text-decoration: none;
+}
+
+    .actions a:hover {
+        color: #2563eb;
+    }
+
+/* =============================== PAGINACIÓN =============================== */
+.pagination-container {
+    margin-top: 25px;
+}
+
+.pagination .page-link {
+    color: #1e3a8a;
+}
+
+.pagination .page-item.active .page-link {
+    color: white;
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.pagination .page-link:hover {
+    color: #ffffff;
+    background-color: #1e3a8a;
+}

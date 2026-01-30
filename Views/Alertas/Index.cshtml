@@ -1,0 +1,167 @@
+﻿@using RecursosHumanos.Models.ViewModels.Empleados
+@model List<PersonalAlarmaVM>
+
+@section Styles {
+    <link href="~/css/styleReclutamiento.css" rel="stylesheet" />
+    <link href="~/css/styleReclutamientoPartial.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/js/AlertasDetailsOverlay.js"></script>
+
+}
+
+<!-- ===================== TÍTULO ===================== -->
+<div class="mb-4">
+    <h2 class="fw-bold">
+        <i class="bi bi-bell"></i> Alertas de Personal
+    </h2>
+</div>
+
+<!-- ===================== TABLA ===================== -->
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">Foto</th>
+                <th>Nombre</th>
+                <th>Departamento</th>
+                <th>Fecha Ingreso</th>
+                <th>Última Liquidación</th>
+                <th class="text-center">Días sin liquidar</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <!-- FOTO -->
+                        <td class="text-center">
+                            @if (item.FotoPersonal != null)
+                            {
+                                var base64 = Convert.ToBase64String(item.FotoPersonal);
+                                <img src="data:image/jpeg;base64,@base64"
+                                     class="rounded-circle"
+                                     style="width:45px;height:45px;object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <i class="bi bi-person-circle fs-3 text-muted"></i>
+                            }
+                </td>
+
+                <!-- DATOS -->
+                <td>@item.Nombre</td>
+                <td>@item.NombreDepartamento</td>
+                <td>@item.FechaIngreso.ToString("dd/MM/yyyy")</td>
+
+                <td>
+                    @(item.FechaUltimaLiquidacion.HasValue
+                                        ? item.FechaUltimaLiquidacion.Value.ToString("dd/MM/yyyy")
+                                        : "—")
+                        </td>
+
+                        <!-- ALERTA -->
+                        <td class="text-center">
+                            @if (item.DiasDesdeUltimaLiquidacion.HasValue)
+                            {
+                                <span class="badge @(item.DiasDesdeUltimaLiquidacion > 30 ? "bg-danger" : "bg-warning text-dark")">
+                                    @item.DiasDesdeUltimaLiquidacion días
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Sin registro</span>
+                            }
+                        </td>
+
+                        <!-- ACCIONES -->
+                        <td class="text-center actions">
+                            <a href="javascript:void(0);"
+                               class="btn-detalle"
+                               onclick="AlertasOverlayDetails.open(@item.IdPersonal)"
+                               title="Ver detalles">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        No se encontraron registros
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- ===================== PAGINACIÓN ===================== -->
+@if (ViewBag.TotalPaginas > 1)
+{
+    int paginasAMostrar = 5;
+    int paginaActual = ViewBag.PaginaActual;
+    int totalPaginas = ViewBag.TotalPaginas;
+
+    int inicio = paginaActual - (paginasAMostrar / 2);
+    if (inicio < 1) inicio = 1;
+
+    int fin = inicio + paginasAMostrar - 1;
+    if (fin > totalPaginas) fin = totalPaginas;
+
+    if (fin - inicio < paginasAMostrar - 1)
+    {
+        inicio = fin - paginasAMostrar + 1;
+        if (inicio < 1) inicio = 1;
+    }
+
+    <nav class="pagination-container mt-4">
+        <ul class="pagination justify-content-center align-items-center">
+
+            <!-- PRIMERA -->
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <a class="page-link" asp-route-page="1">
+                    <i class="bi bi-chevron-double-left"></i>
+                </a>
+            </li>
+
+            <!-- ANTERIOR -->
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <a class="page-link" asp-route-page="@(paginaActual - 1)">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+
+            <!-- NUMEROS -->
+            @for (int i = inicio; i <= fin; i++)
+            {
+                <li class="page-item @(i == paginaActual ? "active" : "")">
+                    <a class="page-link" asp-route-page="@i">@i</a>
+                </li>
+            }
+
+            <!-- SIGUIENTE -->
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <a class="page-link" asp-route-page="@(paginaActual + 1)">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+
+            <!-- ÚLTIMA -->
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <a class="page-link" asp-route-page="@totalPaginas">
+                    <i class="bi bi-chevron-double-right"></i>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+}
+

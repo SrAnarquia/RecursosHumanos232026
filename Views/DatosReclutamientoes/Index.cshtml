@@ -1,0 +1,178 @@
+﻿@model RecursosHumanos.Models.ViewModels.Reclutamiento.ReclutamientoIndexVM
+
+@section Styles {
+    <link href="~/css/styleReclutamiento.css" rel="stylesheet" />
+    <link href="~/css/styleReclutamientoPartial.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/js/ReclutamientoOverlay.js"></script>
+    <script src="~/js/ReclutamientoOverlayEdit.js"></script>
+    <script src="~/js/ReclutamientoOverlayDelete.js"></script>
+    <script src="~/js/ReclutamientoOverlayDetails.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<!-- ===================== TÍTULO ===================== -->
+<div class="mb-4">
+    <h2 class="fw-bold">
+        <i class="bi bi-people"></i> Base de datos Reclutamiento
+    </h2>
+</div>
+
+
+
+<!-- ===================== FILTROS ===================== -->
+<div class="filter-card mb-4">
+    <form method="get" class="filters">
+
+        <input type="text" name="Nombre" value="@Model.Nombre" placeholder="Nombre completo" />
+        <input type="text" name="Telefono" value="@Model.Telefono" placeholder="Teléfono" />
+
+        <input type="date" name="FechaDesde" value="@(Model.FechaDesde?.ToString("yyyy-MM-dd"))" />
+        <input type="date" name="FechaHasta" value="@(Model.FechaHasta?.ToString("yyyy-MM-dd"))" />
+
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-search"></i> Filtrar
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Limpiar
+        </a>
+
+    </form>
+</div>
+
+<!-- ===================== BOTONES SUPERIORES ===================== -->
+<div class="d-flex justify-content-end gap-2 mb-3">
+
+    <!-- Botón Crear -->
+    <button type="button" class="btn btn-success"
+            onclick="ReclutamientoOverlayCreate.open()">
+        <i class="bi bi-person-plus"></i> Crear
+    </button>
+
+    <!-- Botón Exportar a Excel -->
+    <a asp-action="Export"
+       asp-route-Nombre="@Model.Nombre"
+       asp-route-Telefono="@Model.Telefono"
+       asp-route-FechaDesde="@Model.FechaDesde"
+       asp-route-FechaHasta="@Model.FechaHasta"
+       class="btn btn-outline-success"
+       title="Exportar datos a Excel">
+        <i class="bi bi-file-earmark-excel"></i> Exportar
+    </a>
+
+</div>
+
+<!-- ===================== TABLA ===================== -->
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Empresa</th>
+                <th>Estatus</th>
+                <th>Reclutador</th>
+                <th>Fecha contacto</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Datos != null && Model.Datos.Any())
+            {
+                foreach (var item in Model.Datos)
+                {
+                    <tr>
+                        <td>@item.NombreCompleto</td>
+                        <td>@item.Telefono</td>
+                        <td>@item.IdEmpresaNavigation?.Empresa1</td>
+                        <td>@item.IdEstatusNavigation?.Estatus1</td>
+                        <td>@item.IdReclutadorNavigation?.NombreCompleto</td>
+                        <td>@item.FechaContacto.ToString("dd/MM/yyyy")</td>
+                        <td class="text-center actions">
+                            <a href="javascript:void(0)"
+                               onclick="ReclutamientoOverlayDetails.open(@item.Id)"
+                               title="Ver detalles">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            <a href="javascript:void(0)" onclick="ReclutamientoOverlayEdit.edit(@item.Id)" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="javascript:void(0)" onclick="ReclutamientoOverlayDelete.open(@item.Id)" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        No se encontraron registros
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- ===================== PAGINACIÓN ===================== -->
+@if (Model.TotalPaginas > 1)
+{
+    int paginasAMostrar = 5;
+    int paginaActual = Model.PaginaActual;
+    int totalPaginas = Convert.ToInt32(Model.TotalPaginas);
+    int inicio = paginaActual - (paginasAMostrar / 2);
+    if (inicio < 1) inicio = 1;
+    int fin = inicio + paginasAMostrar - 1;
+    if (fin > totalPaginas) fin = totalPaginas;
+    if (fin - inicio < paginasAMostrar - 1) inicio = fin - paginasAMostrar + 1;
+    if (inicio < 1) inicio = 1;
+
+    <nav class="pagination-container">
+        <ul class="pagination justify-content-center align-items-center">
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <a class="page-link" asp-route-pagina="1" asp-route-Nombre="@Model.Nombre"
+                   asp-route-Telefono="@Model.Telefono" asp-route-FechaDesde="@Model.FechaDesde"
+                   asp-route-FechaHasta="@Model.FechaHasta">
+                    <i class="bi bi-chevron-double-left"></i>
+                </a>
+            </li>
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <a class="page-link" asp-route-pagina="@(paginaActual > 1 ? paginaActual - 1 : 1)"
+                   asp-route-Nombre="@Model.Nombre" asp-route-Telefono="@Model.Telefono"
+                   asp-route-FechaDesde="@Model.FechaDesde" asp-route-FechaHasta="@Model.FechaHasta">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+            @for (int i = inicio; i <= fin; i++)
+            {
+                <li class="page-item @(i == paginaActual ? "active" : "")">
+                    <a class="page-link" asp-route-pagina="@i" asp-route-Nombre="@Model.Nombre"
+                       asp-route-Telefono="@Model.Telefono" asp-route-FechaDesde="@Model.FechaDesde"
+                       asp-route-FechaHasta="@Model.FechaHasta">@i</a>
+                </li>
+            }
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <a class="page-link" asp-route-pagina="@(paginaActual<totalPaginas? paginaActual + 1 : totalPaginas)"
+                   asp-route-Nombre="@Model.Nombre" asp-route-Telefono="@Model.Telefono"
+                   asp-route-FechaDesde="@Model.FechaDesde" asp-route-FechaHasta="@Model.FechaHasta">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <a class="page-link" asp-route-pagina="@totalPaginas" asp-route-Nombre="@Model.Nombre"
+                   asp-route-Telefono="@Model.Telefono" asp-route-FechaDesde="@Model.FechaDesde"
+                   asp-route-FechaHasta="@Model.FechaHasta">
+                    <i class="bi bi-chevron-double-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+}
+
+@await Html.PartialAsync("_ReclutamientoCrearPartial")

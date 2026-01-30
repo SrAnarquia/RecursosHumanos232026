@@ -1,0 +1,197 @@
+﻿@model RecursosHumanos.Models.ViewModels.Empleados.PersonalListadoVM
+
+@section Styles {
+    <link href="~/css/styleReclutamiento.css" rel="stylesheet" />
+    <link href="~/css/styleReclutamientoPartial.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/js/EmpleadoResumenOverlayDetails.js"></script>
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<div id="empleadoResumenContainer"></div>
+
+<!-- ===================== TÍTULO ===================== -->
+<div class="mb-4">
+    <h2 class="fw-bold">
+        <i class="bi bi-people"></i> Base de datos Empleados
+    </h2>
+</div>
+
+<!-- ===================== FILTROS ===================== -->
+<div class="filter-card mb-4">
+    <form method="get" class="filters">
+
+        <input type="text" name="FiltroNombre"
+               value="@Model.FiltroNombre"
+               placeholder="Nombre" />
+
+        <input type="text" name="FiltroDepartamento"
+               value="@Model.FiltroDepartamento"
+               placeholder="Departamento" />
+
+        <input type="text" name="FiltroTipoEmpleado"
+               value="@Model.FiltroTipoEmpleado"
+               placeholder="Tipo empleado" />
+
+        <input type="text" name="FiltroEstado"
+               value="@Model.FiltroEstado"
+               placeholder="Estado" />
+
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-search"></i> Filtrar
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Limpiar
+        </a>
+
+    </form>
+</div>
+
+<!-- ===================== TABLA ===================== -->
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">Foto</th>
+                <th>Nombre</th>
+                <th>Departamento</th>
+                <th>Tipo</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.Datos != null && Model.Datos.Any())
+            {
+                foreach (var item in Model.Datos)
+                {
+                    <tr>
+                        <!-- FOTO -->
+                        <td class="text-center">
+                            @if (item.FotoPersonal != null)
+                            {
+                                var base64 = Convert.ToBase64String(item.FotoPersonal);
+                                <img src="data:image/jpeg;base64,@base64"
+                                     class="rounded-circle"
+                                     style="width:45px;height:45px;object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <i class="bi bi-person-circle fs-3 text-muted"></i>
+                            }
+                        </td>
+
+                        <!-- DATOS -->
+                        <td>@item.Nombre</td>
+                        <td>@item.Departamento</td>
+                        <td>@item.TipoEmpleado</td>
+                        <td>@item.Telefono</td>
+                        <td>@item.Email</td>
+                        <td>@item.Estado</td>
+
+                        <!-- ACCIONES -->
+                        <td class="text-center actions">
+                            <a href="javascript:void(0)"
+                               title="Detalles"
+                               onclick="EmpleadoResumen.open(@item.IdPersonal)">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            <a asp-action="Portafolio"
+                               asp-route-id="@item.IdPersonal"
+                               title="Portafolio">
+                                <i class="bi bi-folder"></i>
+                            </a>
+
+                            <a asp-action="Incidentes"
+                               asp-route-id="@item.IdPersonal"
+                               title="Incidencias">
+                                <i class="bi bi-exclamation-triangle"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center text-muted">
+                        No se encontraron registros
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- ===================== PAGINACIÓN ===================== -->
+@if (Model.TotalPaginas > 1)
+{
+    int paginasAMostrar = 5;
+    int paginaActual = Model.PaginaActual;
+    int totalPaginas = Model.TotalPaginas;
+
+    int inicio = paginaActual - (paginasAMostrar / 2);
+    if (inicio < 1) inicio = 1;
+
+    int fin = inicio + paginasAMostrar - 1;
+    if (fin > totalPaginas) fin = totalPaginas;
+
+    if (fin - inicio < paginasAMostrar - 1)
+    {
+        inicio = fin - paginasAMostrar + 1;
+        if (inicio < 1) inicio = 1;
+    }
+
+    <nav class="pagination-container mt-4">
+        <ul class="pagination justify-content-center align-items-center">
+
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <a class="page-link"
+                   asp-route-pagina="1">
+                    <i class="bi bi-chevron-double-left"></i>
+                </a>
+            </li>
+
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <a class="page-link"
+                   asp-route-pagina="@(paginaActual - 1)">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+
+            @for (int i = inicio; i <= fin; i++)
+            {
+                <li class="page-item @(i == paginaActual ? "active" : "")">
+                    <a class="page-link"
+                       asp-route-pagina="@i">
+                        @i
+                    </a>
+                </li>
+            }
+
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <a class="page-link"
+                   asp-route-pagina="@(paginaActual + 1)">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <a class="page-link"
+                   asp-route-pagina="@totalPaginas">
+                    <i class="bi bi-chevron-double-right"></i>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+}

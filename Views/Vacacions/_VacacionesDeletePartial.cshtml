@@ -1,0 +1,63 @@
+﻿@model RecursosHumanos.Models.ViewModels.Vacaciones.VacacionDeleteVM
+
+<div class="reclutamiento-overlay" id="vacacionesOverlayDelete">
+
+    <div class="reclutamiento-modal">
+
+        <!-- HEADER -->
+        <div class="modal-header">
+            <h5>Confirmar eliminación</h5>
+            <button type="button"
+                    class="btn-close"
+                    onclick="VacacionesOverlayDelete.close()">
+            </button>
+        </div>
+
+        <!-- BODY -->
+        <form asp-action="DeleteConfirmedPartial" method="post" id="formDeleteVacacion">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.Datos.Id" />
+
+            <div class="modal-body">
+                <p class="mb-3">
+                    ¿Estás seguro de que deseas eliminar la siguiente solicitud de vacaciones?
+                </p>
+
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        <label class="form-label">Nombre</label>
+                        <input class="form-control"
+                               value="@Model.Datos.Nombre"
+                               disabled />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Departamento</label>
+                        <input class="form-control"
+                               value="@Model.Datos.Departamento"
+                               disabled />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Fecha inicio</label>
+                        <input class="form-control"
+                               value="@Model.Datos.FechaInicio?.ToString("dd/MM/yyyy")"
+                               disabled />
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="modal-footer mt-4">
+                <button type="button"
+                        class="btn btn-secondary"
+                        onclick="VacacionesOverlayDelete.close()">
+                    Cancelar
+                </button>
+
+                <button type="submit"
+                        class="btn btn-danger">
+                    Eliminar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
