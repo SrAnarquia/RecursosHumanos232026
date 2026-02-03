@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using RecursosHumanos.Models;
@@ -17,7 +18,9 @@ public class EmpleadosController : Controller
     }
 
     #region Index
+
     // ===================== INDEX =====================
+    [Authorize]
     public IActionResult Index(PersonalListadoVM filtro, int pagina = 1)
     {
         int pageSize = 10;
@@ -131,6 +134,8 @@ public class EmpleadosController : Controller
 
     //Vista Parcial de Resumen: Vacaciones, Incidentes, Portafolio
     #region Resumen
+
+    [Authorize]
     public IActionResult Resumen(int id)
     {
         var vm = new EmpleadoResumenVM();
@@ -251,6 +256,7 @@ public class EmpleadosController : Controller
 
     //Index Portafolio
     #region Portafolio
+    [Authorize]
     public IActionResult Portafolio(int id, string? curso, DateTime? fechaDesde, DateTime? fechaHasta, int pagina = 1)
     {
         int pageSize = 10; // puedes ajustar el tamaño de página
@@ -361,6 +367,8 @@ public class EmpleadosController : Controller
 
     //Index Incidentes
     #region Incidentes
+
+    [Authorize]
     public IActionResult Incidentes(int id,string? nombreIncidente,DateTime? fechaDesde,DateTime? fechaHasta,int pagina = 1)
     {
         int pageSize = 10;
@@ -464,7 +472,7 @@ public class EmpleadosController : Controller
     #region CreatesIncidentes
 
     #region CreateGet
-   
+    [Authorize]
     [HttpGet]
     public IActionResult CreateIncidente(int idPersona)
     {
@@ -491,6 +499,8 @@ public class EmpleadosController : Controller
     #endregion
 
     #region CreatePost
+
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult CreateIncidente(IncidenteCreateVM model)
@@ -573,6 +583,7 @@ public class EmpleadosController : Controller
 
     //Portafolio
     #region CrearEmpleadoCurso GET (OVERLAY)
+    [Authorize]
     [HttpGet]
     public IActionResult CreateCurso(int idPersona)
     {
@@ -598,6 +609,7 @@ public class EmpleadosController : Controller
     #endregion
 
     #region CrearEmpleadoCurso POST
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult CreateCurso(CursoPersonaCreateVM model)
@@ -675,6 +687,7 @@ public class EmpleadosController : Controller
 
 
     #region Edit GET 
+    [Authorize]
     [HttpGet]
     public IActionResult EditCurso(int id)
     {
@@ -706,6 +719,7 @@ public class EmpleadosController : Controller
 
 
     #region Edit POST
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult EditCurso(CursoPersonaEditVM model)
@@ -761,7 +775,7 @@ public class EmpleadosController : Controller
     #region DeletesPortafolio
 
     #region Delete GET
-
+    [Authorize]
     [HttpGet]
     public IActionResult DeleteCurso(int id)
     {
@@ -792,6 +806,7 @@ public class EmpleadosController : Controller
 
 
     #region Delete POST
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult DeleteCurso(CursoPersonaDeleteVM model)
@@ -832,6 +847,7 @@ public class EmpleadosController : Controller
 
     #region DeleteIncidenteGet
     // ===================== GET =====================
+    [Authorize]
     [HttpGet]
     public IActionResult DeleteIncidente(int id)
     {
@@ -859,6 +875,7 @@ public class EmpleadosController : Controller
 
     #region DeleteIncidentePost
     // ===================== POST =====================
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult DeleteIncidente(IncidenteDeleteVM model)
@@ -900,7 +917,7 @@ public class EmpleadosController : Controller
 
 
     #region Details
-
+    [Authorize]
     [HttpGet]
     public IActionResult DetailsCurso(int id)
     {

@@ -21,36 +21,36 @@
 
                 <div class="col-md-6">
                     <label>Nombre</label>
-                    <input class="form-control" value="@Model.Nombre" readonly />
+                    <input class="form-control" value="@Model.Nombre" disabled />
                 </div>
 
                 <div class="col-md-6">
                     <label>Departamento</label>
-                    <input class="form-control" value="@Model.Departamento" readonly />
+                    <input class="form-control" value="@Model.Departamento" disabled />
                 </div>
 
                 <div class="col-md-6">
                     <label>Fecha inicio</label>
                     <input class="form-control"
                            value="@Model.FechaInicio?.ToString("dd/MM/yyyy")"
-                           readonly />
+                           disabled />
                 </div>
 
                 <div class="col-md-6">
                     <label>Fecha fin</label>
                     <input class="form-control"
                            value="@Model.FechaFinalizacion?.ToString("dd/MM/yyyy")"
-                           readonly />
+                           disabled />
                 </div>
 
                 <div class="col-md-12">
                     <label>Razón</label>
-                    <input class="form-control" value="@Model.Razon" readonly />
+                    <input class="form-control" value="@Model.Razon" disabled />
                 </div>
 
                 <div class="col-md-12">
                     <label>Detalles</label>
-                    <textarea class="form-control" rows="3" readonly>@Model.Detalles</textarea>
+                    <textarea class="form-control" rows="3" disabled>@Model.Detalles</textarea>
                 </div>
 
             </div>

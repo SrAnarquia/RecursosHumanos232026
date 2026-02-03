@@ -23,10 +23,11 @@ public partial class Vacacion
 
     public DateTime? FechaCreacion { get; set; }
 
+    public int? CreadoPor { get; set; }
+
     public virtual Aprobacion? IdAprobadoNavigation { get; set; }
 
     public virtual Razone? IdRazonNavigation { get; set; }
-
 
     public enum RazonVacaciones
     {

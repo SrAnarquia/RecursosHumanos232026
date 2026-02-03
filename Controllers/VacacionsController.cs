@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RecursosHumanos.Models;
@@ -6,6 +8,7 @@ using RecursosHumanos.Models.ViewModels.Vacaciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using static RecursosHumanos.Models.Vacacion;
 
@@ -22,14 +25,21 @@ namespace RecursosHumanos.Controllers
 
 
         #region Index
-        // GET: Vacacions
+
+        [Authorize]
         public async Task<IActionResult> Index(VacacionIndexVM filtro, int pagina = 1)
         {
             int pageSize = 10;
 
+            //Se obtiene de cookie el usuario
+            int usuarioId = int.Parse(
+                User.FindFirst(ClaimTypes.NameIdentifier)!.Value
+                );
+
             var query = _context.Vacacions
                 .Include(v => v.IdAprobadoNavigation)
                 .Include(v => v.IdRazonNavigation)
+                .Where(v=> v.CreadoPor==usuarioId)
                 .AsQueryable();
 
             // ===== FILTROS =====
@@ -68,11 +78,9 @@ namespace RecursosHumanos.Controllers
         }
         #endregion
 
-
-
         #region Aprobaciones
 
-        // Acción para cargar la vista de Aprobaciones
+        [Authorize]
         public async Task<IActionResult> Aprobaciones(VacacionIndexVM filtro, int pagina = 1)
         {
             int pageSize = 10;
@@ -118,7 +126,7 @@ namespace RecursosHumanos.Controllers
         }
 
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Aprobar(int id)
         {
@@ -147,6 +155,8 @@ namespace RecursosHumanos.Controllers
             return Ok();
         }
 
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Rechazar(int id)
         {
@@ -179,8 +189,11 @@ namespace RecursosHumanos.Controllers
 
 
         #region DeletesPartial
+
+
         #region DeletePartialGet
-        // GET: Vacacions/DeletePartial/5
+        [Authorize]
+
         public async Task<IActionResult> DeletePartial(int? id)
         {
             if (id == null) return NotFound();
@@ -204,7 +217,7 @@ namespace RecursosHumanos.Controllers
         #endregion
 
         #region DeletePartialPost
-        // POST: Vacacions/DeletePartial
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmedPartial(int id)
@@ -230,7 +243,7 @@ namespace RecursosHumanos.Controllers
 
 
         #region aprobarGet
-
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> AprobarGet(int id)
         {
@@ -259,7 +272,7 @@ namespace RecursosHumanos.Controllers
 
 
         #region aprobarPost
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AprobarPost(VacacionAprobarVM model)
@@ -272,7 +285,7 @@ namespace RecursosHumanos.Controllers
 
             var aprobacion = new Aprobacion
             {
-                IdPersona = 1, // usuario logueado
+                IdPersona = model.Id, // usuario logueado
                 Estatus = true
             };
 
@@ -290,42 +303,94 @@ namespace RecursosHumanos.Controllers
 
 
 
-        #endregion 
+        #endregion
+
+
+        #endregion
+
+
+        #region RechazarVista
+
+        #region rechazarGet
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> RechazarGet(int id)
+        {
+            var vacacion = await _context.Vacacions
+                .Include(v => v.IdRazonNavigation)
+                .FirstOrDefaultAsync(v => v.Id==id);
+
+
+            if (vacacion == null)
+                return NotFound();
+
+
+            var vm = new VacacionRechazarVM
+            {
+                Id = vacacion.Id,
+                Nombre=vacacion.Nombre,
+                Departamento = vacacion.Departamento,
+                FechaInicio=vacacion.FechaInicio,
+                FechaFinalizacion=vacacion.FechaFinalizacion,
+                Razon = vacacion.IdRazonNavigation?.Razon,
+                Detalles=vacacion.Detalles
+
+
+            };
+
+
+            return PartialView("_RechazarVacacion",vm);
+        }
+
+        #endregion
+
+        #region rechazarPost
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RechazarPost(VacacionRechazarVM model) 
+        {
+
+            var vacacion = await _context.Vacacions
+                .FirstOrDefaultAsync(v => v.Id == model.Id);
+
+
+            if (vacacion==null)
+                return NotFound();
+
+            var Aprobacion = new Aprobacion
+            {
+                IdPersona = model.Id, 
+                Estatus = false
+            };
+
+
+            _context.Aprobacions.Add(Aprobacion);
+            await _context.SaveChangesAsync();
+
+            vacacion.IdAprobado = Aprobacion.Id;
+            _context.Vacacions.Update(vacacion);
+            await _context.SaveChangesAsync();
+
+
+            return RedirectToAction(nameof(Aprobaciones));
+
+        }
+
 
 
         #endregion
 
 
 
+        #endregion
 
+        #region CreatesPartial
 
-
-
-
-
-
-
-        // GET: Vacacions/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var vacacion = await _context.Vacacions
-                .Include(v => v.IdAprobadoNavigation)
-                .Include(v => v.IdRazonNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (vacacion == null)
-            {
-                return NotFound();
-            }
-
-            return View(vacacion);
-        }
-
-        // GET: Vacacions/Create
+        #region CreatePartialGet
+        
+        [Authorize]
         public IActionResult Create()
         {
             var model = new VacacionCreateVM
@@ -344,11 +409,11 @@ namespace RecursosHumanos.Controllers
             return PartialView("_VacacionesCrearPartial", model);
         }
 
+        #endregion
 
 
-
-
-
+        #region CreatePartialPost
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VacacionCreateVM model)
@@ -366,16 +431,30 @@ namespace RecursosHumanos.Controllers
                 return PartialView("_VacacionesCrearPartial", model);
             }
 
+            //Se obtiene de cookie el usuario
+            int usuarioId = int.Parse(
+                User.FindFirst(ClaimTypes.NameIdentifier)!.Value
+                );
+
+            //Se agrega quien lo creo dependiendo de la sesion
+            model.Nuevo.CreadoPor = usuarioId;
+
             model.Nuevo.FechaCreacion = DateTime.Now;
             _context.Vacacions.Add(model.Nuevo);
             await _context.SaveChangesAsync();
 
             return Ok(); // ✅ devuelvo solo 200 OK
          }
+        #endregion
+
+        #endregion
 
 
+        #region EditsPartial
 
-        // GET: Vacacions/Edit/5
+        #region EditPartialGet
+
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -393,7 +472,10 @@ namespace RecursosHumanos.Controllers
             return View(vacacion);
         }
 
-        
+        #endregion
+
+        #region EditPartialPost
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Departamento,Detalles,FechaInicio,FechaFinalizacion,IdRazon,IdAprobado,FechaCreacion")] Vacacion vacacion)
@@ -427,8 +509,15 @@ namespace RecursosHumanos.Controllers
             ViewData["IdRazon"] = new SelectList(_context.Razones, "Id", "Id", vacacion.IdRazon);
             return View(vacacion);
         }
+        #endregion
 
-        // GET: Vacacions/Delete/5
+
+        #endregion
+
+        #region DeletesPartial
+
+        #region DeletePartialGet
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -447,8 +536,11 @@ namespace RecursosHumanos.Controllers
 
             return View(vacacion);
         }
+        #endregion
 
-        // POST: Vacacions/Delete/5
+
+        #region DeletePartialPost
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -462,10 +554,135 @@ namespace RecursosHumanos.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
+        #endregion
+
+
+
+        #region ExportToExcel
+
+        //Tipo De vista
+        public enum TipoExportVacaciones
+        {
+            Index,
+            Aprobaciones
+        }
+
+
+
+        //Filtrado Segun vista
+        private IQueryable<Vacacion> BuildVacacionesQuery(VacacionIndexVM filtro,TipoExportVacaciones tipo)
+        {
+            var query = _context.Vacacions
+                .Include(v => v.IdAprobadoNavigation)
+                .Include(v => v.IdRazonNavigation)
+                .AsQueryable();
+
+            // 👉 Index: solo las creadas por el usuario logeado
+            if (tipo == TipoExportVacaciones.Index)
+            {
+                int usuarioId = int.Parse(
+                    User.FindFirst(ClaimTypes.NameIdentifier)!.Value
+                );
+
+                query = query.Where(v => v.CreadoPor == usuarioId);
+            }
+
+            // ===== FILTROS COMUNES =====
+            if (!string.IsNullOrEmpty(filtro.Nombre))
+                query = query.Where(v => v.Nombre.Contains(filtro.Nombre));
+
+            if (!string.IsNullOrEmpty(filtro.Departamento))
+                query = query.Where(v => v.Departamento.Contains(filtro.Departamento));
+
+            if (filtro.FechaDesde.HasValue)
+                query = query.Where(v => v.FechaInicio >= filtro.FechaDesde);
+
+            if (filtro.FechaHasta.HasValue)
+                query = query.Where(v => v.FechaFinalizacion <= filtro.FechaHasta);
+
+            return query;
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Export(VacacionIndexVM filtro,TipoExportVacaciones tipo)
+        {
+            var datos = await BuildVacacionesQuery(filtro, tipo)
+                .OrderByDescending(v => v.FechaCreacion)
+                .ToListAsync();
+
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Vacaciones");
+
+            // 🔹 ENCABEZADOS
+            worksheet.Cell(1, 1).Value = "ID";
+            worksheet.Cell(1, 2).Value = "Nombre";
+            worksheet.Cell(1, 3).Value = "Departamento";
+            worksheet.Cell(1, 4).Value = "Fecha Inicio";
+            worksheet.Cell(1, 5).Value = "Fecha Fin";
+            worksheet.Cell(1, 6).Value = "Razón";
+            worksheet.Cell(1, 7).Value = "Estatus";
+
+            var header = worksheet.Range("A1:G1");
+            header.Style.Font.Bold = true;
+            header.Style.Fill.BackgroundColor = XLColor.LightGray;
+            header.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+            // 🔹 DATOS
+            int fila = 2;
+            foreach (var v in datos)
+            {
+                worksheet.Cell(fila, 1).Value = v.Id;
+                worksheet.Cell(fila, 2).Value = v.Nombre;
+                worksheet.Cell(fila, 3).Value = v.Departamento;
+                worksheet.Cell(fila, 4).Value = v.FechaInicio;
+                worksheet.Cell(fila, 5).Value = v.FechaFinalizacion;
+                worksheet.Cell(fila, 6).Value = v.IdRazonNavigation?.Razon;
+                worksheet.Cell(fila, 7).Value =
+                    v.IdAprobadoNavigation == null
+                        ? "Pendiente"
+                        : v.IdAprobadoNavigation.Estatus.Value ? "Aprobado" : "Rechazado";
+
+                fila++;
+            }
+
+            worksheet.Columns().AdjustToContents();
+
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            stream.Position = 0;
+
+            string origen = tipo == TipoExportVacaciones.Index
+                ? "MisVacaciones"
+                : "Aprobaciones";
+
+            string fileName = $"{origen}_{DateTime.Now:yyyyMMdd_HHmm}.xlsx";
+
+            return File(
+                stream.ToArray(),
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                fileName
+            );
+        }
+
+
+
+
+
+        #endregion 
+
+
+
+
+        #region ExistData
+
+        [Authorize]
         private bool VacacionExists(int id)
         {
             return _context.Vacacions.Any(e => e.Id == id);
         }
+        #endregion
     }
 }

@@ -16,4 +16,6 @@ public partial class Usuario
     public string Nombre { get; set; } = null!;
 
     public string Correo { get; set; } = null!;
+
+    public int? TipoUsuario { get; set; }
 }

@@ -1,291 +1,347 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\RecursosHumanos.bundle.scp.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\RecursosHumanos.bundle.scp.css",
       "PackagePath": "staticwebassets\\RecursosHumanos.6d1gc5owcu.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\css\\Login.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\UploadedFiles\\24a35e97-5d49-463e-8e8d-4edd7e3a26e6.png",
+      "PackagePath": "staticwebassets\\UploadedFiles\\24a35e97-5d49-463e-8e8d-4edd7e3a26e6.png"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\UploadedFiles\\35b791d3-411a-4dbc-b547-d2b8bc669379.jpeg",
+      "PackagePath": "staticwebassets\\UploadedFiles\\35b791d3-411a-4dbc-b547-d2b8bc669379.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\UploadedFiles\\ded17c31-e446-4edd-91e6-af53f6e9a38d.png",
+      "PackagePath": "staticwebassets\\UploadedFiles\\ded17c31-e446-4edd-91e6-af53f6e9a38d.png"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\css\\Login.css",
       "PackagePath": "staticwebassets\\css\\Login.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\css\\StyleReclutamiento.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\css\\StyleReclutamiento.css",
       "PackagePath": "staticwebassets\\css\\StyleReclutamiento.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\css\\_Layout.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\css\\_Layout.css",
       "PackagePath": "staticwebassets\\css\\_Layout.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\css\\site.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\css\\styleReclutamientoPartial.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\css\\styleReclutamientoPartial.css",
       "PackagePath": "staticwebassets\\css\\styleReclutamientoPartial.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\js\\AlertasDetailsOverlay.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\AlertasDetailsOverlay.js",
       "PackagePath": "staticwebassets\\js\\AlertasDetailsOverlay.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\js\\ReclutamientoCharts.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\EmpleadoCursoOverlayCreate.js",
+      "PackagePath": "staticwebassets\\js\\EmpleadoCursoOverlayCreate.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\EmpleadoCursoOverlayDelete.js",
+      "PackagePath": "staticwebassets\\js\\EmpleadoCursoOverlayDelete.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\EmpleadoCursoOverlayDetails.js",
+      "PackagePath": "staticwebassets\\js\\EmpleadoCursoOverlayDetails.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\EmpleadoCursoOverlayEdit.js",
+      "PackagePath": "staticwebassets\\js\\EmpleadoCursoOverlayEdit.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\EmpleadoIncidenteOverlayCreate.js",
+      "PackagePath": "staticwebassets\\js\\EmpleadoIncidenteOverlayCreate.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\EmpleadoIncidenteOverlayDelete.js",
+      "PackagePath": "staticwebassets\\js\\EmpleadoIncidenteOverlayDelete.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\EmpleadoResumenOverlayDetails.js",
+      "PackagePath": "staticwebassets\\js\\EmpleadoResumenOverlayDetails.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\ReclutamientoCharts.js",
       "PackagePath": "staticwebassets\\js\\ReclutamientoCharts.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\js\\ReclutamientoOverlay.js",
-      "PackagePath": "staticwebassets\\js\\ReclutamientoOverlay.js"
-    },
-    {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\js\\ReclutamientoOverlayDelete.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\ReclutamientoOverlayDelete.js",
       "PackagePath": "staticwebassets\\js\\ReclutamientoOverlayDelete.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\js\\ReclutamientoOverlayDetails.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\ReclutamientoOverlayDetails.js",
       "PackagePath": "staticwebassets\\js\\ReclutamientoOverlayDetails.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\js\\ReclutamientoOverlayEdit.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\ReclutamientoOverlayEdit.js",
       "PackagePath": "staticwebassets\\js\\ReclutamientoOverlayEdit.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\js\\_Layout.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\VacacionesOverlayAprobacion.js",
+      "PackagePath": "staticwebassets\\js\\VacacionesOverlayAprobacion.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\VacacionesOverlayCreate.js",
+      "PackagePath": "staticwebassets\\js\\VacacionesOverlayCreate.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\VacacionesOverlayDelete.js",
+      "PackagePath": "staticwebassets\\js\\VacacionesOverlayDelete.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\VacacionesOverlayRechazar.js",
+      "PackagePath": "staticwebassets\\js\\VacacionesOverlayRechazar.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\_Layout.js",
       "PackagePath": "staticwebassets\\js\\_Layout.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\js\\site.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\reclutamientoOverlay.js",
+      "PackagePath": "staticwebassets\\js\\reclutamientoOverlay.js"
+    },
+    {
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR Desarrollo\\RecursosHumanos\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {

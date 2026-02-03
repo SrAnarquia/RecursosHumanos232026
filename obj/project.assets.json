@@ -7591,29 +7591,30 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "ClosedXML >= 0.105.0",
+      "Microsoft.EntityFrameworkCore.Analyzers >= 8.0.23",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.23",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.23"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Jonathan Corpus\\.nuget\\packages\\": {},
+    "C:\\Users\\korpu\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos_195fc95\\RecursosHumanos.csproj",
+      "projectUniqueName": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\RecursosHumanos.csproj",
       "projectName": "RecursosHumanos",
-      "projectPath": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos_195fc95\\RecursosHumanos.csproj",
-      "packagesPath": "C:\\Users\\Jonathan Corpus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos_195fc95\\obj\\",
+      "projectPath": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\RecursosHumanos.csproj",
+      "packagesPath": "C:\\Users\\korpu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\korpu\\OneDrive\\Escritorio\\HR\\RecursosHumanosLastUpdate\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Jonathan Corpus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\korpu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7641,7 +7642,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -7650,6 +7651,10 @@
           "ClosedXML": {
             "target": "Package",
             "version": "[0.105.0, )"
+          },
+          "Microsoft.EntityFrameworkCore.Analyzers": {
+            "target": "Package",
+            "version": "[8.0.23, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
@@ -7685,7 +7690,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

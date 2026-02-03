@@ -29,6 +29,7 @@ namespace RecursosHumanos.Controllers
 
         #region Index
         // GET: DatosReclutamientoes
+        [Authorize]
         public async Task<IActionResult> Index(ReclutamientoIndexVM filtro,int pagina=1)
         {
             int pageSize = 10;
@@ -108,6 +109,7 @@ namespace RecursosHumanos.Controllers
 
         #region Detalles
         // GET: DatosReclutamientoes/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -199,6 +201,7 @@ namespace RecursosHumanos.Controllers
         #endregion
 
         #region Details (Overlay)
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> DetailsPartial(int id)
         {
@@ -232,6 +235,7 @@ namespace RecursosHumanos.Controllers
 
 
         #region Edit
+        [Authorize]
         // GET: DatosReclutamientoes/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
@@ -275,6 +279,7 @@ namespace RecursosHumanos.Controllers
 
 
         #region EditPost
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind(Prefix = "Nuevo")] DatosReclutamiento model)
@@ -326,7 +331,7 @@ namespace RecursosHumanos.Controllers
 
 
         #region DeleteConfirm
-        // POST: DatosReclutamientoes/Delete/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -349,8 +354,7 @@ namespace RecursosHumanos.Controllers
         #endregion
 
         #region Delete (Overlay)
-
-        // GET: DatosReclutamientoes/DeletePartial/5
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> DeletePartial(int id)
         {
@@ -373,7 +377,7 @@ namespace RecursosHumanos.Controllers
 
 
         #region FiltersPreparation
-
+        [Authorize]
         private IQueryable<DatosReclutamiento> BuildQuery(ReclutamientoIndexVM filtro)
         {
             var query = _context.DatosReclutamientos
@@ -409,6 +413,7 @@ namespace RecursosHumanos.Controllers
         #endregion
 
         #region Export
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Export(ReclutamientoIndexVM filtro)
         {

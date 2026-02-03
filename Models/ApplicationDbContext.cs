@@ -25,6 +25,8 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<Categorium> Categoria { get; set; }
 
+    public virtual DbSet<Correo> Correos { get; set; }
+
     public virtual DbSet<CursosPersona> CursosPersonas { get; set; }
 
     public virtual DbSet<DatosReclutamiento> DatosReclutamientos { get; set; }
@@ -32,6 +34,8 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<DatosReclutamientoReflejo> DatosReclutamientoReflejos { get; set; }
 
     public virtual DbSet<Departamento> Departamentos { get; set; }
+
+    public virtual DbSet<DiasEmpleado> DiasEmpleados { get; set; }
 
     public virtual DbSet<Empresa> Empresas { get; set; }
 
@@ -152,6 +156,26 @@ public partial class ApplicationDbContext : DbContext
 
             entity.Property(e => e.Nombre)
                 .HasMaxLength(255)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Correo>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Correos__3214EC078A956CA9");
+
+            entity.ToTable("Correos", "Vacaciones");
+
+            entity.Property(e => e.Correo1)
+                .HasMaxLength(255)
+                .HasColumnName("Correo");
+            entity.Property(e => e.Departamento)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(500)
                 .IsUnicode(false);
         });
 
@@ -285,6 +309,17 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<DiasEmpleado>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__DiasEmpl__3214EC070106B0AD");
+
+            entity.ToTable("DiasEmpleados", "Vacaciones");
+
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
         });
 
         modelBuilder.Entity<Empresa>(entity =>
@@ -471,6 +506,9 @@ public partial class ApplicationDbContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("nombre");
+            entity.Property(e => e.TipoUsuario)
+                .HasDefaultValue(1)
+                .HasColumnName("tipo_usuario");
             entity.Property(e => e.Usuario1)
                 .HasMaxLength(255)
                 .IsUnicode(false)

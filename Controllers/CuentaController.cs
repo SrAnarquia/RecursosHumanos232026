@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Security.Claims;
 using RecursosHumanos.Models;
 using Microsoft.IdentityModel.Abstractions;
 using RecursosHumanos.Models.ViewModels.Login;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 
 namespace RecursosHumanos.Controllers
 {
@@ -34,34 +36,51 @@ namespace RecursosHumanos.Controllers
 
         #region LoginPost
         [HttpPost]
-        public IActionResult Login(LoginViewModelscs model) 
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModelscs model)
         {
+
+
             if (ModelState.IsValid)
             {
                 //Creando usuario con la propiedade _context
                 var usuario = _context.Usuarios
-                    .FirstOrDefault(u=> u.Usuario1== model.Username);
+                    .FirstOrDefault(u => u.Usuario1 == model.Username);
 
                 //Se checa no sea nulo el dato
-                if (usuario != null && usuario.Contraseña ==model.Password) 
+                if (usuario != null && usuario.Contraseña == model.Password)
                 {
-                    //Se establece la cookie
-                    CookieOptions options = new CookieOptions
+                    //Se crean los claims informacion del usuarios
+                    var claims = new List<Claim> 
                     {
-                        Expires = model.RememberMe ? DateTimeOffset.UtcNow : DateTimeOffset.UtcNow,
-                        HttpOnly = true, //Evita haceso desde javascript
-                        Secure = true //Solo por HTTPS
+                        new Claim(ClaimTypes.Name,usuario.Usuario1),
+                        new Claim(ClaimTypes.NameIdentifier,usuario.Id.ToString()),
+                        new Claim("EsAdmin", usuario.EsAdministrador ? "1" : "0"),
+                        new Claim("TipoUsuario", usuario.TipoUsuario.ToString())
+
+
 
                     };
 
-                    Response.Cookies.Append("UsuarioLogueado",usuario.Usuario1,options);
+                    var identity = new ClaimsIdentity(claims,"MyCookieAuth");
+                    var principal = new ClaimsPrincipal(identity);
 
-                    return RedirectToAction("Index","Home");
+                    //Crea la cookie de autenticacion
+                    await HttpContext.SignInAsync("MyCookieAuth", principal,
+                        new AuthenticationProperties
+                        {
+                            IsPersistent = model.RememberMe,
+                            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
+
+                        });
+
+                    return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError("","Usuario o contraseña incorrecta");
+                ModelState.AddModelError("", "");
             }
             return View(model);
+
 
         }
 
@@ -71,13 +90,13 @@ namespace RecursosHumanos.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //Se elimina la cookie
-        public IActionResult Logout() 
+        public async Task<IActionResult> Logout() 
         {
             //Elimina la cookie del navegador
-            Response.Cookies.Delete("UsuarioLogueado");
+            await HttpContext.SignOutAsync("MyCookieAuth");
 
             //Redirigir a Login
-            return RedirectToAction("Login");
+            return RedirectToAction("Login","Cuenta");
         }
         #endregion
 

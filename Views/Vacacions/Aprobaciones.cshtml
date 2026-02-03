@@ -7,6 +7,7 @@
 
 @section Scripts {
     <script src="~/js/VacacionesOverlayAprobacion.js"></script>
+    <script src="~/js/VacacionesOverlayRechazar.js"></script>
     <partial name="_ValidationScriptsPartial" />
 }
 
@@ -44,6 +45,21 @@
     </form>
 </div>
 
+<!-- ===================== BOTONES SUPERIORES ===================== -->
+<div class="d-flex justify-content-end mb-3">
+    <a asp-action="Export"
+       asp-route-tipo="Aprobaciones"
+       asp-route-Nombre="@Model.Nombre"
+       asp-route-Departamento="@Model.Departamento"
+       asp-route-FechaDesde="@Model.FechaDesde"
+       asp-route-FechaHasta="@Model.FechaHasta"
+       class="btn btn-outline-success"
+       title="Exportar aprobaciones a Excel">
+        <i class="bi bi-file-earmark-excel"></i> Exportar
+    </a>
+</div>
+
+
 <!-- ===================== TABLA ===================== -->
 <div class="table-responsive">
     <table class="table table-hover table-bordered align-middle">
@@ -69,10 +85,13 @@
                         <td>@item.FechaInicio?.ToString("dd/MM/yyyy")</td>
                         <td>@item.FechaFinalizacion?.ToString("dd/MM/yyyy")</td>
                         <td>
-                            @(item.IdAprobadoNavigation != null && item.IdAprobadoNavigation.Estatus == true
-                                                ? "Aprobado"
-                                                : "Pendiente")
+                            @(item.IdAprobadoNavigation?.Estatus == true
+                                ? "Aprobado"
+                                : item.IdAprobadoNavigation?.Estatus == false
+                                ? "Rechazado"
+                                : "Pendiente")
                         </td>
+
                         <td>@item.IdRazonNavigation?.Razon</td>
                         <td class="text-center actions">
 
@@ -92,7 +111,7 @@
                                 </a>
 
                                 <a href="javascript:void(0);"
-                                   onclick="rechazarSolicitud(@item.Id)"
+                                   onclick="VacacionesOverlayRechazar.open(@item.Id)"
                                    class="text-danger mx-1"
                                    title="Rechazar">
                                     <i class="bi bi-x-circle"></i>

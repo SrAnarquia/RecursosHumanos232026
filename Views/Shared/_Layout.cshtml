@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -12,6 +14,9 @@
 
     <!-- CSS Principal -->
     <link href="~/css/_Layout.css" rel="stylesheet" />
+
+    <!-- jQuery global -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script> 
 
     @RenderSection("Styles", required: false)
 </head>
@@ -28,66 +33,100 @@
             </div>
             <nav class="sidebar-menu">
 
-                <!-- HOME -->
-                <a asp-controller="Home" asp-action="Index" class="menu-item">
-                    <i class="bi bi-house"></i>
-                    <span>Home</span>
-                </a>
+                <!--Si el usuario es Administrador-->
+                @if (User.HasClaim("EsAdmin", "1"))
+                {
+                    <!-- HOME -->
+                    <a asp-controller="Home" asp-action="Index" class="menu-item">
+                        <i class="bi bi-house"></i>
+                        <span>Home</span>
+                    </a>
 
-                <!-- EMPLEADOS -->
-                <div class="menu-group">
-                    <button class="menu-item menu-toggle">
-                        <i class="bi bi-people"></i>
-                        <span>Empleados</span>
-                        <i class="bi bi-chevron-down arrow"></i>
-                    </button>
-                    <ul class="submenu">
-                        <li><a asp-controller="Empleados" asp-action="Index">Visualizar</a></li>
-                        <li><a asp-controller="Alertas" asp-action="Index">Alertas</a></li>
-                        <li><a asp-controller="Empleados" asp-action="Estadisticas">Estadísticas</a></li>
-                    </ul>
-                </div>
+                    <!-- EMPLEADOS -->
+                    <div class="menu-group">
+                        <button class="menu-item menu-toggle">
+                            <i class="bi bi-people"></i>
+                            <span>Empleados</span>
+                            <i class="bi bi-chevron-down arrow"></i>
+                        </button>
+                        <ul class="submenu">
+                            <li><a asp-controller="Empleados" asp-action="Index">Visualizar</a></li>
+                            <li><a asp-controller="Alertas" asp-action="Index">Alertas</a></li>
+                            <li><a asp-controller="Empleados" asp-action="Estadisticas">Estadísticas</a></li>
+                        </ul>
+                    </div>
 
-                <!-- RECLUTAMIENTO -->
-                <div class="menu-group">
-                    <button class="menu-item menu-toggle">
-                        <i class="bi bi-clipboard-check"></i>
-                        <span>Reclutamiento</span>
-                        <i class="bi bi-chevron-down arrow"></i>
-                    </button>
-                    <ul class="submenu">
-                        <li><a asp-controller="DatosReclutamientoes" asp-action="Index">Reclutar</a></li>
-                        <li><a asp-controller="EstadisticasReclutamiento" asp-action="Index">Estadísticas</a></li>
-                    </ul>
-                </div>
+                    <!-- RECLUTAMIENTO -->
+                    <div class="menu-group">
+                        <button class="menu-item menu-toggle">
+                            <i class="bi bi-clipboard-check"></i>
+                            <span>Reclutamiento</span>
+                            <i class="bi bi-chevron-down arrow"></i>
+                        </button>
+                        <ul class="submenu">
+                            <li><a asp-controller="DatosReclutamientoes" asp-action="Index">Reclutar</a></li>
+                            <li><a asp-controller="EstadisticasReclutamiento" asp-action="Index">Estadísticas</a></li>
+                        </ul>
+                    </div>
 
-                <!-- VACACIONES -->
-                <div class="menu-group">
-                    <button class="menu-item menu-toggle">
-                        <i class="bi bi-sun"></i>
-                        <span>Vacaciones</span>
-                        <i class="bi bi-chevron-down arrow"></i>
-                    </button>
-                    <ul class="submenu">    
-                        <li><a asp-controller="Vacacions" asp-action="Index">Solicitud</a></li>
-                        <li><a asp-controller="Vacacions" asp-action="Aprobaciones">Aprobaciones</a></li>
-                    </ul>
-                </div>
+                    <!-- VACACIONES -->
+                    <div class="menu-group">
+                        <button class="menu-item menu-toggle">
+                            <i class="bi bi-sun"></i>
+                            <span>Vacaciones</span>
+                            <i class="bi bi-chevron-down arrow"></i>
+                        </button>
+                        <ul class="submenu">
+                            <li><a asp-controller="Vacacions" asp-action="Index">Solicitud</a></li>
+                            <li><a asp-controller="Vacacions" asp-action="Aprobaciones">Aprobaciones</a></li>
+                        </ul>
+                    </div>
 
-                <!-- ENTRENAMIENTO -->
-                <div class="menu-group">
-                    <button class="menu-item menu-toggle">
-                        <i class="bi bi-mortarboard"></i>
-                        <span>Entrenamiento</span>
-                        <i class="bi bi-chevron-down arrow"></i>
-                    </button>
-                    <ul class="submenu">
-                        <li><a asp-controller="Entrenamiento" asp-action="Create">Cursos</a></li>
-                        <li><a asp-controller="Entrenamiento" asp-action="Cursos">Aprendizaje</a></li>
-                    </ul>
-                </div>
+                    <!-- ENTRENAMIENTO -->
+                    <div class="menu-group">
+                        <button class="menu-item menu-toggle">
+                            <i class="bi bi-mortarboard"></i>
+                            <span>Entrenamiento</span>
+                            <i class="bi bi-chevron-down arrow"></i>
+                        </button>
+                        <ul class="submenu">
+                            <li><a asp-controller="Entrenamiento" asp-action="Create">Cursos</a></li>
+                            <li><a asp-controller="Entrenamiento" asp-action="Cursos">Aprendizaje</a></li>
+                        </ul>
+                    </div>
 
-               
+                }
+                else
+                {
+
+                    <!-- VACACIONES -->
+                    <div class="menu-group">
+                        <button class="menu-item menu-toggle">
+                            <i class="bi bi-sun"></i>
+                            <span>Vacaciones</span>
+                            <i class="bi bi-chevron-down arrow"></i>
+                        </button>
+                        <ul class="submenu">
+                            <li><a asp-controller="Vacacions" asp-action="Index">Solicitud</a></li>
+                        </ul>
+                    </div>
+
+
+                    <!-- ENTRENAMIENTO -->
+                    <div class="menu-group">
+                        <button class="menu-item menu-toggle">
+                            <i class="bi bi-mortarboard"></i>
+                            <span>Entrenamiento</span>
+                            <i class="bi bi-chevron-down arrow"></i>
+                        </button>
+                        <ul class="submenu">
+                            <li><a asp-controller="Entrenamiento" asp-action="Cursos">Aprendizaje</a></li>
+                        </ul>
+                    </div>
+
+                }
+
+
 
             </nav>
 

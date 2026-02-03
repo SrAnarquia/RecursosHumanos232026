@@ -12,7 +12,13 @@
             <h4 class="mb-0"><i class="bi bi-person-circle me-2"></i>Iniciar Sesión</h4>
         </div>
         <div class="card-body p-4">
-            <form asp-action="Login" method="post" id="loginForm">
+            <form asp-controller="Cuenta" asp-action="Login" method="post" id="loginForm">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly"
+                     class="border-start border-3 border-danger ps-3 py-2 mb-3 text-danger small d-flex align-items-center gap-2">
+                    <i class="bi bi-info-circle"></i>
+                    <span>Verifique los datos ingresados</span>
+                </div>
 
                 <div class="mb-3">
                     <label asp-for="Username" class="form-label fw-semibold">Usuario</label>
@@ -46,15 +52,48 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
 
     <script>
-        document.getElementById("loginForm").addEventListener("submit", function () {
-            const btn = this.querySelector("button[type='submit']");
-            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Ingresando...';
+        const form = document.getElementById("loginForm");
+        const btn = form.querySelector("button[type=submit]");
+        const originalText = btn.innerHTML;
+
+        form.addEventListener("submit", function (e) {
+
+            // Si jQuery Validation existe y el form NO es válido → cancelar
+            if (window.jQuery && $(form).data("validator") && !$(form).valid()) {
+                e.preventDefault();
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            // Fallback HTML5
+            if (!form.checkValidity()) {
+                e.preventDefault();
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            // ✅ Formulario válido → dejar que haga POST
             btn.disabled = true;
+            btn.innerHTML =
+                '<span class="spinner-border spinner-border-sm"></span> Ingresando...';
+        });
+
+        // Cuando el servidor regresa con errores
+        window.addEventListener("load", () => {
+            const hasErrors =
+                document.querySelectorAll(".field-validation-error").length > 0;
+
+            if (hasErrors) {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
         });
     </script>
+
 }
+

@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
 using RecursosHumanos.Models.ViewModels.Empleados;
+using Microsoft.AspNetCore.Authorization;
 
 public class AlertasController : Controller
 {
@@ -13,6 +14,7 @@ public class AlertasController : Controller
     }
 
     #region Alertas
+    [Authorize]
     public IActionResult Index(int page = 1)
     {
         int pageSize = 10;
@@ -64,6 +66,7 @@ public class AlertasController : Controller
 
 
     #region Details
+    [Authorize]
     public IActionResult Details(int id)
     {
         PersonalAlarmaDetalleVM model = null;

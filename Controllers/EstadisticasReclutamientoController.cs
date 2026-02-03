@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using RecursosHumanos.Models;
 using RecursosHumanos.Models.ViewModels.Reclutamiento;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RecursosHumanos.Controllers
 {
@@ -16,6 +17,7 @@ namespace RecursosHumanos.Controllers
             _context = context;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index(int anio = 0, int mes = 0)
         {
             // 🔒 Validación clave

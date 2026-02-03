@@ -1,0 +1,73 @@
+﻿@model RecursosHumanos.Models.ViewModels.Vacaciones.VacacionRechazarVM
+
+<div class="reclutamiento-overlay" id="vacacionesOverlay">
+    <div class="reclutamiento-modal">
+
+        <div class="modal-header">
+            <h5>
+                <i class="bi bi-check-circle"></i> Rechazar solicitud de vacaciones
+            </h5>
+            <button type="button"
+                    class="btn-close"
+                    onclick="VacacionesOverlayRechazar.close()">
+            </button>
+        </div>
+
+        <form id="formaRechazarVacacion" asp-action="RechazarPost" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <label>Nombre</label>
+                    <input class="form-control" value="@Model.Nombre" disabled />
+                </div>
+
+                <div class="col-md-6">
+                    <label>Departamento</label>
+                    <input class="form-control" value="@Model.Departamento" disabled />
+                </div>
+
+                <div class="col-md-6">
+                    <label>Fecha inicio</label>
+                    <input class="form-control"
+                           value="@Model.FechaInicio?.ToString("dd/MM/yyyy")"
+                           disabled />
+                </div>
+
+                <div class="col-md-6">
+                    <label>Fecha fin</label>
+                    <input class="form-control"
+                           value="@Model.FechaFinalizacion?.ToString("dd/MM/yyyy")"
+                           disabled />
+                </div>
+
+                <div class="col-md-12">
+                    <label>Razón</label>
+                    <input class="form-control" value="@Model.Razon" disabled />
+                </div>
+
+                <div class="col-md-12">
+                    <label>Detalles</label>
+                    <textarea class="form-control" rows="3" disabled>@Model.Detalles</textarea>
+                </div>
+
+            </div>
+
+            <div class="modal-footer mt-4">
+                <button type="button"
+                        class="btn btn-secondary"
+                        onclick="VacacionesOverlayRechazar.close()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-x-circle"></i> Rechazar
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
