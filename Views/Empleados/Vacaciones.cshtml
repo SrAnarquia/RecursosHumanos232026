@@ -1,0 +1,105 @@
+﻿@model RecursosHumanos.Models.ViewModels.Empleados.PersonalVacacionesVM
+
+@section Styles {
+    <link href="~/css/styleReclutamiento.css" rel="stylesheet" />
+    <link href="~/css/styleReclutamientoPartial.css" rel="stylesheet" />
+}
+
+<!-- ===================== TÍTULO ===================== -->
+<div class="mb-4">
+    <a asp-action="Index" asp-controller="Empleados"
+       class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left fs-4"></i>
+    </a>
+
+    <h2 class="fw-bold mb-0">Vacaciones</h2>
+</div>
+
+<!-- ===================== CARD PERSONA ===================== -->
+<div class="filter-card mb-4">
+    <div class="d-flex align-items-center">
+        @if (Model.FotoPersonal != null)
+        {
+            var base64 = Convert.ToBase64String(Model.FotoPersonal);
+            <img src="data:image/jpeg;base64,@base64"
+                 class="rounded-circle me-3"
+                 style="width:70px;height:70px;object-fit:cover;" />
+        }
+        else
+        {
+            <i class="bi bi-person-circle fs-1 text-muted me-3"></i>
+        }
+
+        <div>
+            <h5 class="mb-0">@Model.Nombre</h5>
+            <small class="text-muted">
+                @Model.Departamento | @Model.TipoEmpleado
+            </small><br />
+            <small class="text-muted">
+                @Model.Email | @Model.Telefono
+            </small>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== FILTROS ===================== -->
+<div class="filter-card mb-4">
+    <form method="get" class="filters">
+        <input type="date" name="fechaDesde"
+               value="@(Model.FechaDesde?.ToString("yyyy-MM-dd"))" />
+
+        <input type="date" name="fechaHasta"
+               value="@(Model.FechaHasta?.ToString("yyyy-MM-dd"))" />
+
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-search"></i> Filtrar
+        </button>
+
+        <a asp-action="Vacaciones" asp-route-id="@Model.IdPersonal"
+           class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Limpiar
+        </a>
+    </form>
+</div>
+
+<!-- ===================== TABLA ===================== -->
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Detalles</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Solicitud</th>
+                <th>Estatus</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Vacaciones.Any())
+            {
+                foreach (var v in Model.Vacaciones)
+                {
+                    <tr>
+                        <td>@v.Detalles</td>
+                        <td>@v.FechaInicio?.ToString("dd/MM/yyyy")</td>
+                        <td>@v.FechaFinalizacion?.ToString("dd/MM/yyyy")</td>
+                        <td>@v.FechaCreacion.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <span class="badge @(v.Estatus == "Aprobado" ? "bg-success" : "bg-warning")">
+                                @v.Estatus
+                            </span>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-muted">
+                        No hay solicitudes de vacaciones
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

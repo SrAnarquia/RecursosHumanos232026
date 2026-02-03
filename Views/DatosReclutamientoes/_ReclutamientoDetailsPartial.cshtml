@@ -1,46 +1,82 @@
-﻿@using RecursosHumanos.Models.ViewModels.Empleados
-@model PersonalAlarmaDetalleVM
+﻿@model RecursosHumanos.Models.ViewModels.Reclutamiento.ReclutamientoDetailsVM
 
-<div class="alertas-overlay alertas-overlay-details">
-    <div class="alertas-modal">
+<div class="reclutamiento-overlay show">
 
+    <div class="reclutamiento-modal">
+
+        <!-- ================= HEADER ================= -->
         <div class="modal-header">
-            <h5><i class="bi bi-eye"></i> Detalles del personal</h5>
-            <button type="button"
-                    class="btn-close"
-                    onclick="AlertasOverlayDetails.close()"></button>
+            <h5 class="mb-0">
+                <i class="bi bi-eye"></i> Detalles del candidato
+            </h5>
+            <button class="btn-close"
+                    onclick="ReclutamientoOverlayDetails.close()"></button>
         </div>
 
+        <!-- ================= BODY ================= -->
         <div class="modal-body">
-            <dl class="row">
 
-                <dt class="col-sm-4">Nombre</dt>
-                <dd class="col-sm-8">@Model.Nombre</dd>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Nombre</strong><br />
+                    @Model.Datos.NombreCompleto
+                </div>
+                <div class="col-md-6">
+                    <strong>Teléfono</strong><br />
+                    @Model.Datos.Telefono
+                </div>
+            </div>
 
-                <dt class="col-sm-4">Departamento</dt>
-                <dd class="col-sm-8">@Model.NombreDepartamento</dd>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Empresa</strong><br />
+                    @(Model.Datos.IdEmpresaNavigation?.Empresa1 ?? "—")
+                </div>
+                <div class="col-md-6">
+                    <strong>Estatus</strong><br />
+                    @(Model.Datos.IdEstatusNavigation?.Estatus1 ?? "—")
+                </div>
+            </div>
 
-                <dt class="col-sm-4">Estado</dt>
-                <dd class="col-sm-8">@Model.Estado</dd>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Reclutador</strong><br />
+                    @(Model.Datos.IdReclutadorNavigation?.NombreCompleto ?? "—")
+                </div>
+                <div class="col-md-6">
+                    <strong>Fecha contacto</strong><br />
+                    @Model.Datos.FechaContacto.ToString("dd/MM/yyyy")
+                </div>
+            </div>
 
-                <dt class="col-sm-4">Teléfono</dt>
-                <dd class="col-sm-8">@Model.TelefonoPersonal</dd>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Fuente</strong><br />
+                    @(Model.Datos.IdFuenteNavigation?.Fuente1 ?? "—")
+                </div>
+                <div class="col-md-6">
+                    <strong>Posición</strong><br />
+                    @(Model.Datos.IdPosicionNavigation?.Posicion1 ?? "—")
+                </div>
+            </div>
 
-                <dt class="col-sm-4">Correo</dt>
-                <dd class="col-sm-8">@Model.Email</dd>
+            <div class="mb-3">
+                <strong>Comentarios</strong>
+                <div class="border rounded p-2 mt-1 bg-light">
+                    @Model.Datos.Comentarios
+                </div>
+            </div>
 
-                <dt class="col-sm-4">Emergencia</dt>
-                <dd class="col-sm-8">@Model.TelefonoEmergencia</dd>
+            <div class="text-muted small">
+                Creado el: @Model.Datos.FechaCreación.ToString("dd/MM/yyyy HH:mm")
+            </div>
 
-                <dt class="col-sm-4">Dirección</dt>
-                <dd class="col-sm-8">@Model.Direccion</dd>
-
-            </dl>
         </div>
 
+        <!-- ================= FOOTER ================= -->
         <div class="modal-footer">
             <button class="btn btn-secondary"
-                    onclick="AlertasOverlayDetails.close()">
+                    onclick="ReclutamientoOverlayDetails.close()">
                 Cerrar
             </button>
         </div>

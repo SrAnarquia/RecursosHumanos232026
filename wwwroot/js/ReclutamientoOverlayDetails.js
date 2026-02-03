@@ -1,17 +1,21 @@
 ﻿var ReclutamientoOverlayDetails = (function () {
 
     function open(id) {
-        close(); // evita overlays duplicados
+        close();
 
         fetch(`/DatosReclutamientoes/DetailsPartial/${id}`)
-            .then(res => res.text())
+            .then(res => {
+                if (!res.ok) throw new Error();
+                return res.text();
+            })
             .then(html => {
                 document.body.insertAdjacentHTML("beforeend", html);
-            });
+            })
+            .catch(() => { });
     }
 
     function close() {
-        document.querySelectorAll(".reclutamiento-overlay-details")
+        document.querySelectorAll(".reclutamiento-overlay")
             .forEach(o => o.remove());
     }
 
@@ -19,4 +23,5 @@
         open,
         close
     };
+
 })();

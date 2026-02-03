@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using RecursosHumanos.Models.ViewModels;
+using RecursosHumanos.Models.ViewModels.Empleados;
+using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 
 namespace RecursosHumanos.Models;
 
@@ -64,6 +66,11 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<UsuarioEspejo> UsuarioEspejos { get; set; }
 
     public virtual DbSet<Vacacion> Vacacions { get; set; }
+
+    public DbSet<RazonTotal> RazonTotal { get; set; }
+
+    public DbSet<MesTotal> MestTotal { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=DefaultConnection");
@@ -571,6 +578,12 @@ public partial class ApplicationDbContext : DbContext
                 .HasForeignKey(d => d.IdRazon)
                 .HasConstraintName("FK_RAZONES");
         });
+
+        // ===== DTO para Stored Procedures (Estadísticas) =====
+        modelBuilder.Entity<RazonTotal>().HasNoKey();
+        modelBuilder.Entity<MesTotal>().HasNoKey();
+
+
 
         OnModelCreatingPartial(modelBuilder);
     }

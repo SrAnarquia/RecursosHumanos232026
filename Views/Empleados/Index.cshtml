@@ -49,7 +49,25 @@
         </a>
 
     </form>
+
+    
 </div>
+
+
+<!-- ===================== BOTONES SUPERIORES ===================== -->
+<div class="d-flex justify-content-end gap-2 mt-n2 mb-3">
+    <a asp-action="Export"
+       asp-controller="Empleados"
+       asp-route-FiltroNombre="@Model.FiltroNombre"
+       asp-route-FiltroDepartamento="@Model.FiltroDepartamento"
+       asp-route-FiltroTipoEmpleado="@Model.FiltroTipoEmpleado"
+       asp-route-FiltroEstado="@Model.FiltroEstado"
+       class="btn btn-outline-success"
+       title="Exportar datos a Excel">
+        <i class="bi bi-file-earmark-excel"></i> Exportar
+    </a>
+</div>
+
 
 <!-- ===================== TABLA ===================== -->
 <div class="table-responsive">
@@ -115,6 +133,13 @@
                                title="Incidencias">
                                 <i class="bi bi-exclamation-triangle"></i>
                             </a>
+                            <a asp-action="Vacaciones"
+                               asp-route-id="@item.IdPersonal"
+                               title="Vacaciones">
+                                <i class="bi bi-calendar-check"></i>
+                            </a>
+
+
 
                         </td>
                     </tr>

@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using RecursosHumanos.Models;
 using RecursosHumanos.Models.ViewModels.Empleados;
 using System.Data;
+using System.Text;
 
 public class EmpleadosController : Controller
 {
@@ -465,6 +466,120 @@ public class EmpleadosController : Controller
         return View(vm);
     }
     #endregion
+
+
+    //Index Vacaciones
+    #region Vacaciones
+    [Authorize]
+    public IActionResult Vacaciones(
+        int id,
+        DateTime? fechaDesde,
+        DateTime? fechaHasta,
+        int pagina = 1)
+    {
+        int pageSize = 10;
+
+        var vm = new PersonalVacacionesVM
+        {
+            FechaDesde = fechaDesde,
+            FechaHasta = fechaHasta,
+            PaginaActual = pagina,
+            Vacaciones = new List<VacacionVM>()
+        };
+
+        // ===================== PERSONA (ALERTAS) =====================
+        using (SqlConnection cn = new SqlConnection(
+            _configuration.GetConnectionString("AlertasConnection")))
+        {
+            using SqlCommand cmd = new SqlCommand("Empleado_DatosPorId", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@IdPersonal", id);
+
+            cn.Open();
+            using SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                vm.IdPersonal = id;
+                vm.FotoPersonal = dr["foto_personal"] as byte[];
+                vm.Nombre = dr["nombre"]?.ToString() ?? string.Empty;
+                vm.Departamento = dr["Departamento"]?.ToString() ?? string.Empty;
+                vm.TipoEmpleado = dr["tipo_empleado"]?.ToString() ?? string.Empty;
+                vm.Telefono = dr["telefono"]?.ToString() ?? string.Empty;
+                vm.Email = dr["email"]?.ToString() ?? string.Empty;
+                vm.Estado = dr["estado"]?.ToString() ?? string.Empty;
+            }
+        }
+
+        // ===================== VACACIONES =====================
+        var vacacionesTemp = new List<VacacionVM>();
+
+        using (SqlConnection cn = new SqlConnection(
+            _configuration.GetConnectionString("DefaultConnection")))
+        {
+            using SqlCommand cmd = new SqlCommand("Vacaciones_PorUsuario", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@IdUsuario", id);
+
+            cn.Open();
+            using SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                vacacionesTemp.Add(new VacacionVM
+                {
+                    Id = dr["Id"] != DBNull.Value
+                        ? Convert.ToInt32(dr["Id"])
+                        : 0,
+
+                    Detalles = dr["Detalles"]?.ToString(),
+
+                    FechaInicio = dr["FechaInicio"] != DBNull.Value
+                        ? Convert.ToDateTime(dr["FechaInicio"])
+                        : (DateTime?)null,
+
+                    FechaFinalizacion = dr["FechaFinalizacion"] != DBNull.Value
+                        ? Convert.ToDateTime(dr["FechaFinalizacion"])
+                        : (DateTime?)null,
+
+                    FechaCreacion = dr["FechaCreacion"] != DBNull.Value
+                        ? Convert.ToDateTime(dr["FechaCreacion"])
+                        : DateTime.MinValue,
+
+                    Estatus = dr["IdAprobado"] != DBNull.Value &&
+                              Convert.ToInt32(dr["IdAprobado"]) == 22
+                        ? "Aprobado"
+                        : "Pendiente"
+                });
+            }
+        }
+
+        // ===================== FILTROS =====================
+        if (fechaDesde.HasValue)
+            vacacionesTemp = vacacionesTemp
+                .Where(v => v.FechaInicio.HasValue &&
+                            v.FechaInicio.Value >= fechaDesde.Value)
+                .ToList();
+
+        if (fechaHasta.HasValue)
+            vacacionesTemp = vacacionesTemp
+                .Where(v => v.FechaFinalizacion.HasValue &&
+                            v.FechaFinalizacion.Value <= fechaHasta.Value)
+                .ToList();
+
+        // ===================== PAGINACIÓN =====================
+        int totalRegistros = vacacionesTemp.Count;
+        vm.TotalPaginas = (int)Math.Ceiling(totalRegistros / (double)pageSize);
+
+        vm.Vacaciones = vacacionesTemp
+            .Skip((pagina - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        return View(vm);
+    }
+
+    #endregion
+
+
 
 
 
@@ -942,6 +1057,143 @@ public class EmpleadosController : Controller
         return PartialView("_DetailsCurso", curso);
     }
 
+    #endregion
+
+
+
+
+    //Exportar a Excel
+    #region Export CSV
+    [Authorize]
+    public IActionResult Export(
+        string? filtroNombre,
+        string? filtroDepartamento,
+        string? filtroTipoEmpleado,
+        string? filtroEstado)
+    {
+        var empleados = new List<PersonalListadoVM>();
+
+        // ===================== EMPLEADOS (ALERTAS) =====================
+        using (SqlConnection cn = new SqlConnection(
+            _configuration.GetConnectionString("AlertasConnection")))
+        {
+            using SqlCommand cmd = new SqlCommand("Empleados_datos", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cn.Open();
+            using SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                empleados.Add(new PersonalListadoVM
+                {
+                    IdPersonal = Convert.ToInt32(dr["id_personal"]),
+                    Nombre = dr["nombre"]?.ToString(),
+                    Departamento = dr["descripcion"]?.ToString(),
+                    TipoEmpleado = dr["tipo_empleado"]?.ToString(),
+                    Telefono = dr["telefono"]?.ToString(),
+                    Email = dr["email"]?.ToString(),
+                    Estado = dr["estado"]?.ToString()
+                });
+            }
+        }
+
+        // ===================== FILTROS =====================
+        if (!string.IsNullOrEmpty(filtroNombre))
+            empleados = empleados.Where(x => x.Nombre.Contains(filtroNombre)).ToList();
+
+        if (!string.IsNullOrEmpty(filtroDepartamento))
+            empleados = empleados.Where(x => x.Departamento == filtroDepartamento).ToList();
+
+        if (!string.IsNullOrEmpty(filtroTipoEmpleado))
+            empleados = empleados.Where(x => x.TipoEmpleado == filtroTipoEmpleado).ToList();
+
+        if (!string.IsNullOrEmpty(filtroEstado))
+            empleados = empleados.Where(x => x.Estado == filtroEstado).ToList();
+
+        // ===================== CSV =====================
+        var sb = new StringBuilder();
+
+        sb.AppendLine("Nombre,Departamento,TipoEmpleado,Telefono,Email,Estado,TotalIncidentes,TotalCursos,TotalVacaciones");
+
+        using (SqlConnection cn = new SqlConnection(
+            _configuration.GetConnectionString("DefaultConnection")))
+        {
+            cn.Open();
+
+            foreach (var e in empleados)
+            {
+                int totalIncidentes = 0;
+                int totalCursos = 0;
+                int totalVacaciones = 0;
+
+                // ===== INCIDENTES =====
+                using (SqlCommand cmd = new SqlCommand("Incidentes_Resumen", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdPersona", e.IdPersonal);
+
+                    using SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        totalIncidentes = dr["Total"] != DBNull.Value
+                            ? Convert.ToInt32(dr["Total"])
+                            : 0;
+                    }
+                }
+
+                // ===== CURSOS =====
+                using (SqlCommand cmd = new SqlCommand("Cursos_Resumen", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdPersona", e.IdPersonal);
+
+                    using SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        totalCursos = dr["Total"] != DBNull.Value
+                            ? Convert.ToInt32(dr["Total"])
+                            : 0;
+                    }
+                }
+
+                // ===== VACACIONES =====
+                using (SqlCommand cmd = new SqlCommand("Vacaciones_Resumen", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdPersona", e.IdPersonal);
+
+                    using SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        totalVacaciones = dr["DiasTomados"] != DBNull.Value
+                            ? Convert.ToInt32(dr["DiasTomados"])
+                            : 0;
+                    }
+                }
+
+                // ===== CSV ROW =====
+                sb.AppendLine(
+                    $"\"{e.Nombre}\"," +
+                    $"\"{e.Departamento}\"," +
+                    $"\"{e.TipoEmpleado}\"," +
+                    $"\"{e.Telefono}\"," +
+                    $"\"{e.Email}\"," +
+                    $"\"{e.Estado}\"," +
+                    $"{totalIncidentes}," +
+                    $"{totalCursos}," +
+                    $"{totalVacaciones}"
+                );
+            }
+        }
+
+        byte[] buffer = Encoding.UTF8.GetBytes(sb.ToString());
+
+        return File(
+            buffer,
+            "text/csv",
+            $"Reporte_Empleados_{DateTime.Now:yyyyMMdd_HHmm}.csv"
+        );
+    }
     #endregion
 
 

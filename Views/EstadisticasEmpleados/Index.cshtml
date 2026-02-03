@@ -1,0 +1,188 @@
+﻿@model RecursosHumanos.Models.ViewModels.Empleados.EmpleadosEstadisticasVM
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const meses = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.CursosPorMes.Keys));
+
+        // ================= TENDENCIAS =================
+        new Chart(chartTendencias, {
+            type: 'line',
+            data: {
+                labels: meses,
+                datasets: [
+                    {
+                        label: 'Cursos',
+                        data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.CursosPorMes.Values)),
+                        borderWidth: 2,
+                        tension: .4
+                    },
+                    {
+                        label: 'Vacaciones',
+                        data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.VacacionesPorMes.Values)),
+                        borderWidth: 2,
+                        tension: .4
+                    },
+                    {
+                        label: 'Incidentes',
+                        data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.IncidentesPorMes.Values)),
+                        borderWidth: 2,
+                        tension: .4
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // ================= VACACIONES =================
+        new Chart(chartVacaciones, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.RazonesVacaciones.Keys)),
+                datasets: [{
+                    data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.RazonesVacaciones.Values))
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                maintainAspectRatio: false,
+                scales: {
+                    x: { beginAtZero: true }
+                }
+            }
+        });
+
+        // ================= INCIDENTES =================
+        new Chart(chartIncidentes, {
+            type: 'doughnut',
+            data: {
+                labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.RazonesIncidentes.Keys)),
+                datasets: [{
+                    data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.RazonesIncidentes.Values))
+                }]
+            },
+            options: {
+                maintainAspectRatio: false
+            }
+        });
+
+        // ================= BALANCE =================
+        new Chart(chartBalance, {
+            type: 'bar',
+            data: {
+                labels: ['Cursos', 'Vacaciones', 'Incidentes'],
+                datasets: [{
+                    data: [
+                        @Model.TotalCursos,
+                        @Model.VacacionesPorMes.Values.Sum(),
+                        @Model.IncidentesPorMes.Values.Sum()
+                    ]
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+}
+
+
+
+<style>
+    .chart-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,.08);
+        height: 420px;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 300px;
+    }
+</style>
+
+<h3 class="mb-4 fw-bold">📊 Dashboard RH</h3>
+
+<form method="get" class="mb-4">
+    <div class="row g-3">
+        <div class="col-md-3">
+            <label class="form-label fw-semibold">Año</label>
+            <select name="anio" class="form-select">
+                @foreach (var a in Model.Anios)
+                {
+                    <option value="@a.Value" selected="@a.Selected">@a.Text</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label fw-semibold">Mes</label>
+            <select name="mes" class="form-select">
+                <option value="0">TODOS</option>
+                @foreach (var m in Model.Meses)
+                {
+                    <option value="@m.Value" selected="@m.Selected">@m.Text</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2 align-self-end">
+            <button class="btn btn-primary w-100">Filtrar</button>
+        </div>
+    </div>
+</form>
+
+<!-- 🔹 TENDENCIAS -->
+<div class="row g-4 mb-4">
+    <div class="col-12">
+        <div class="chart-card">
+            <h6 class="fw-bold mb-3">Tendencia Mensual RH</h6>
+            <div class="chart-container">
+                <canvas id="chartTendencias"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 CATEGORÍAS -->
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="chart-card">
+            <h6 class="fw-bold mb-3">Razones de Vacaciones</h6>
+            <div class="chart-container">
+                <canvas id="chartVacaciones"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="chart-card">
+            <h6 class="fw-bold mb-3">Razones de Incidentes</h6>
+            <div class="chart-container">
+                <canvas id="chartIncidentes"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 BALANCE -->
+<div class="row g-4">
+    <div class="col-12">
+        <div class="chart-card">
+            <h6 class="fw-bold mb-3">Balance Anual</h6>
+            <div class="chart-container">
+                <canvas id="chartBalance"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
