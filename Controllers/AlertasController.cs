@@ -87,32 +87,55 @@ public class AlertasController : Controller
             {
                 IdPersonal = id,
                 FotoPersonal = dr["foto_personal"] as byte[],
-                Nombre = dr["nombre"].ToString(),
-                NombreDepartamento = dr["nombre_departamento"].ToString(),
-                Estado = dr["estado"].ToString(),
+                Nombre = dr["nombre"]?.ToString() ?? string.Empty,
+                NombreDepartamento = dr["nombre_departamento"]?.ToString() ?? string.Empty,
+                Estado = dr["estado"]?.ToString() ?? string.Empty,
 
-                FechaIngreso = Convert.ToDateTime(dr["fecha_ingreso"]),
+                FechaIngreso = dr["fecha_ingreso"] != DBNull.Value
+                    ? Convert.ToDateTime(dr["fecha_ingreso"])
+                    : (DateTime?)null,
+
                 FechaBaja = dr["fecha_baja"] as DateTime?,
                 FechaReingreso = dr["fecha_reingreso"] as DateTime?,
-                AntiguedadAnios = Convert.ToInt32(dr["antiguedad_anios"]),
+
+                AntiguedadAnios = dr["antiguedad_anios"] != DBNull.Value
+                    ? Convert.ToInt32(dr["antiguedad_anios"])
+                    : 0,
 
                 FechaUltimaLiquidacion = dr["fecha_ultima_liquidacion"] as DateTime?,
-                DiasDesdeUltimaLiquidacion = dr["dias_desde_ultima_liquidacion"] as int?,
-                TotalLiquidaciones = Convert.ToInt32(dr["total_liquidaciones"]),
-                TotalViajes = Convert.ToInt32(dr["total_viajes"]),
-                TotalPagado = Convert.ToDecimal(dr["total_pagado"]),
-                TotalGastos = Convert.ToDecimal(dr["total_gastos"]),
+
+                DiasDesdeUltimaLiquidacion = dr["dias_desde_ultima_liquidacion"] != DBNull.Value
+                    ? Convert.ToInt32(dr["dias_desde_ultima_liquidacion"])
+                    : (int?)null,
+
+                TotalLiquidaciones = dr["total_liquidaciones"] != DBNull.Value
+                    ? Convert.ToInt32(dr["total_liquidaciones"])
+                    : 0,
+
+                TotalViajes = dr["total_viajes"] != DBNull.Value
+                    ? Convert.ToInt32(dr["total_viajes"])
+                    : 0,
+
+                TotalPagado = dr["total_pagado"] != DBNull.Value
+                    ? Convert.ToDecimal(dr["total_pagado"])
+                    : 0m,
+
+                TotalGastos = dr["total_gastos"] != DBNull.Value
+                    ? Convert.ToDecimal(dr["total_gastos"])
+                    : 0m,
+
                 UltimaFechaPago = dr["ultima_fecha_pago"] as DateTime?,
 
-                TelefonoPersonal = dr["telefono_personal"].ToString(),
-                Email = dr["email"].ToString(),
-                TelefonoEmergencia = dr["tel_emergencia"].ToString(),
-                Direccion = dr["direccion"].ToString()
+                TelefonoPersonal = dr["telefono_personal"]?.ToString() ?? string.Empty,
+                Email = dr["email"]?.ToString() ?? string.Empty,
+                TelefonoEmergencia = dr["tel_emergencia"]?.ToString() ?? string.Empty,
+                Direccion = dr["direccion"]?.ToString() ?? string.Empty
             };
         }
 
         return PartialView("_Details", model);
     }
+
 
     #endregion 
 

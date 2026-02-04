@@ -318,8 +318,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>uhp5fzc6a1</Fingerprint>
-      <Integrity>rtQewPlzt+KoNtXCGRxD1QSrq8vP+nLXjUiHwQHGMDI=</Integrity>
+      <Fingerprint>fitnc8aif2</Fingerprint>
+      <Integrity>2T7IUVuSVGakTGqjDGX4YRZ8FgxwGg6nRBSRxgC5JZk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\ReclutamientoOverlayDetails.js'))</OriginalItemSpec>

@@ -389,19 +389,36 @@ namespace RecursosHumanos.Controllers
         #region CreatesPartial
 
         #region CreatePartialGet
-        
+
         [Authorize]
         public IActionResult Create()
         {
+            // 1️⃣ Obtener Id del usuario desde la cookie
+            int usuarioId = int.Parse(
+                User.FindFirst(ClaimTypes.NameIdentifier)!.Value
+            );
+
+            // 2️⃣ Obtener usuario desde BD
+            var usuario = _context.Usuarios
+                .FirstOrDefault(u => u.Id == usuarioId);
+
+            // 3️⃣ Crear el modelo
             var model = new VacacionCreateVM
             {
-                Nuevo = new Vacacion(),
+                Nuevo = new Vacacion
+                {
+                    // Autorellenado
+                    Nombre = usuario?.Usuario1,              // o usuario?.NombreCompleto
+                    Departamento = usuario?.Departamento     // puede ser null, no pasa nada
+                },
+
                 Razones = Enum.GetValues(typeof(RazonVacaciones))
                     .Cast<RazonVacaciones>()
                     .Select(r => new SelectListItem
                     {
                         Value = ((int)r).ToString(),
-                        Text = r.ToString().Replace("AsuntosPersonales", "Asuntos personales")
+                        Text = r.ToString()
+                                .Replace("AsuntosPersonales", "Asuntos personales")
                     })
                     .ToList()
             };

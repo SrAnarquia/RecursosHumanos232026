@@ -31,7 +31,16 @@
         }
 
         <div>
-            <h5 class="mb-0">@Model.Nombre</h5>
+            <h5 class="mb-0 d-flex align-items-center gap-2">
+                @Model.Nombre
+
+                <a href="javascript:void(0)"
+                   class="text-muted"
+                   title="Editar días de vacaciones"
+                   onclick="VacacionesDiasOverlay.open(@Model.IdPersonal)">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+            </h5>
             <small class="text-muted">
                 @Model.Departamento | @Model.TipoEmpleado
             </small><br />

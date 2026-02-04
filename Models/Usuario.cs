@@ -18,4 +18,7 @@ public partial class Usuario
     public string Correo { get; set; } = null!;
 
     public int? TipoUsuario { get; set; }
+
+    public string? Departamento { get; set; }
+
 }

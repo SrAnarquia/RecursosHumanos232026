@@ -10,7 +10,7 @@
         public string Estado { get; set; }
 
         /* ===== Información laboral ===== */
-        public DateTime FechaIngreso { get; set; }
+        public DateTime? FechaIngreso { get; set; }
         public DateTime? FechaBaja { get; set; }
         public DateTime? FechaReingreso { get; set; }
         public int AntiguedadAnios { get; set; }

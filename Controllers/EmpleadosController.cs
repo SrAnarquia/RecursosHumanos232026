@@ -487,7 +487,7 @@ public class EmpleadosController : Controller
             Vacaciones = new List<VacacionVM>()
         };
 
-        // ===================== PERSONA (ALERTAS) =====================
+        // ===================== PERSONA =====================
         using (SqlConnection cn = new SqlConnection(
             _configuration.GetConnectionString("AlertasConnection")))
         {
@@ -524,6 +524,10 @@ public class EmpleadosController : Controller
             using SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
+                int estatusDb = dr["Estatus"] != DBNull.Value
+                    ? Convert.ToInt32(dr["Estatus"])
+                    : 0;
+
                 vacacionesTemp.Add(new VacacionVM
                 {
                     Id = dr["Id"] != DBNull.Value
@@ -544,26 +548,32 @@ public class EmpleadosController : Controller
                         ? Convert.ToDateTime(dr["FechaCreacion"])
                         : DateTime.MinValue,
 
-                    Estatus = dr["IdAprobado"] != DBNull.Value &&
-                              Convert.ToInt32(dr["IdAprobado"]) == 22
-                        ? "Aprobado"
-                        : "Pendiente"
+                    Estatus = estatusDb switch
+                    {
+                        1 => "Aprobado",
+                        2 => "Rechazado",
+                        _ => "Pendiente"
+                    }
                 });
             }
         }
 
         // ===================== FILTROS =====================
         if (fechaDesde.HasValue)
+        {
             vacacionesTemp = vacacionesTemp
                 .Where(v => v.FechaInicio.HasValue &&
-                            v.FechaInicio.Value >= fechaDesde.Value)
+                            v.FechaInicio.Value.Date >= fechaDesde.Value.Date)
                 .ToList();
+        }
 
         if (fechaHasta.HasValue)
+        {
             vacacionesTemp = vacacionesTemp
                 .Where(v => v.FechaFinalizacion.HasValue &&
-                            v.FechaFinalizacion.Value <= fechaHasta.Value)
+                            v.FechaFinalizacion.Value.Date <= fechaHasta.Value.Date)
                 .ToList();
+        }
 
         // ===================== PAGINACIÓN =====================
         int totalRegistros = vacacionesTemp.Count;
@@ -576,8 +586,8 @@ public class EmpleadosController : Controller
 
         return View(vm);
     }
-
     #endregion
+
 
 
 
