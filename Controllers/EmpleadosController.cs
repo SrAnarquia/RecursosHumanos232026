@@ -161,7 +161,8 @@ public class EmpleadosController : Controller
                     : 0;
 
                 vm.Nombre = dr["nombre"]?.ToString() ?? string.Empty;
-                vm.Departamento = dr["Departamento"]?.ToString() ?? string.Empty;
+                vm.Departamento = dr["Departamento"]?.ToString() ?? string.Empty;  
+
                 vm.FotoPersonal = dr["foto_personal"] as byte[];
 
                 // No viene en el SP → valor neutro

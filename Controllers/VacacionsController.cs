@@ -453,8 +453,15 @@ namespace RecursosHumanos.Controllers
                 User.FindFirst(ClaimTypes.NameIdentifier)!.Value
                 );
 
+            //Se obtiene el nombre del usuario
+
+            string nombreCompleto = _context.Usuarios.FirstOrDefault(u => u.Id == usuarioId).Nombre.ToString();
+
             //Se agrega quien lo creo dependiendo de la sesion
             model.Nuevo.CreadoPor = usuarioId;
+
+            //Se agrega el nombre de quien lo crea:
+            model.Nuevo.Nombre = nombreCompleto;
 
             model.Nuevo.FechaCreacion = DateTime.Now;
             _context.Vacacions.Add(model.Nuevo);
