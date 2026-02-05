@@ -589,6 +589,116 @@ public class EmpleadosController : Controller
     }
     #endregion
 
+    //PartialView Edit Index Vacaciones
+    #region VacacionesDiasEdit
+
+    #region DiasVacacionesGetEdit
+    [Authorize]
+    public IActionResult DiasVacacionesEditPartial(int id)
+    {
+        var vm = new DiasEmpleadoEditVM();
+
+        // ================= DATOS PERSONA (Alertas) =================
+        using (SqlConnection cn = new SqlConnection(
+            _configuration.GetConnectionString("AlertasConnection")))
+        {
+            using SqlCommand cmd = new SqlCommand("Empleado_DatosPorId", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@IdPersonal", id);
+
+            cn.Open();
+            using SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                vm.IdEmpleado = id;
+                vm.FotoPersonal = dr["foto_personal"] as byte[];
+                vm.Nombre = dr["nombre"]?.ToString();
+                vm.Departamento = dr["Departamento"]?.ToString();
+                vm.TipoEmpleado = dr["tipo_empleado"]?.ToString();
+                vm.Email = dr["email"]?.ToString();
+                vm.Telefono = dr["telefono"]?.ToString();
+            }
+        }
+
+        // ================= DÍAS DE VACACIONES =================
+        using (SqlConnection cn = new SqlConnection(
+            _configuration.GetConnectionString("DefaultConnection")))
+        {
+            using SqlCommand cmd = new SqlCommand(
+                "Vacaciones.DiasEmpleados_PorEmpleado", cn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@IdEmpleado", id);
+
+            cn.Open();
+            using SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                vm.TotalDias = dr["TotalDias"] != DBNull.Value
+                    ? Convert.ToInt32(dr["TotalDias"])
+                    : 0;
+            }
+            else
+            {
+                vm.TotalDias = 0;
+            }
+        }
+
+        return PartialView("_DiasVacacionesEditPartial", vm);
+    }
+
+    #endregion
+
+    #region DiasVacacionesUpdateInsert
+    [HttpPost]
+    [Authorize]
+    public IActionResult GuardarDiasVacaciones(int IdEmpleado, int TotalDias)
+    {
+        using SqlConnection cn = new SqlConnection(
+            _configuration.GetConnectionString("DefaultConnection"));
+
+        cn.Open();
+
+        // 1️⃣ Verificar si ya existe registro
+        bool existe = false;
+
+        using (SqlCommand checkCmd = new SqlCommand(
+            @"SELECT TOP 1 1 
+          FROM Vacaciones.DiasEmpleados 
+          WHERE IdEmpleado = @IdEmpleado", cn))
+        {
+            checkCmd.Parameters.AddWithValue("@IdEmpleado", IdEmpleado);
+            existe = checkCmd.ExecuteScalar() != null;
+        }
+
+        // 2️⃣ Ejecutar INSERT o UPDATE
+        SqlCommand cmd;
+
+        if (existe)
+        {
+            cmd = new SqlCommand(
+                "Vacaciones.DiasEmpleados_Update", cn);
+        }
+        else
+        {
+            cmd = new SqlCommand(
+                "Vacaciones.DiasEmpleados_Insert", cn);
+        }
+
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@IdEmpleado", IdEmpleado);
+        cmd.Parameters.AddWithValue("@TotalDias", TotalDias);
+
+        cmd.ExecuteNonQuery();
+
+        return Ok();
+    }
+
+
+    #endregion
+
+
+    #endregion
 
 
 

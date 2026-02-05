@@ -1,12 +1,37 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos_195fc95\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|c:\\users\\jonathan corpus\\desktop\\nuevos desarrollos\\desarrollos\\visual studio\\recursoshumanos04022026\\recursoshumanos232026\\controllers\\empleadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|solutionrelative:controllers\\empleadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmpleadosController.cs",
+              "DocumentMoniker": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\Controllers\\EmpleadosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EmpleadosController.cs",
+              "ToolTip": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\Controllers\\EmpleadosController.cs",
+              "RelativeToolTip": "Controllers\\EmpleadosController.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAkwL0CAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T22:16:00.83Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

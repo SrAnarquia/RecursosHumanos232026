@@ -1,0 +1,92 @@
+﻿@model RecursosHumanos.Models.ViewModels.Empleados.DiasEmpleadoEditVM
+
+<div class="reclutamiento-overlay show">
+
+    <div class="reclutamiento-modal">
+
+        <!-- ================= HEADER ================= -->
+        <div class="modal-header">
+            <h5 class="mb-0">
+                <i class="bi bi-calendar-check"></i> Días de vacaciones
+            </h5>
+            <button class="btn-close"
+                    onclick="VacacionesDiasOverlay.close()"></button>
+        </div>
+
+        <!-- ================= BODY ================= -->
+        <div class="modal-body">
+
+            <div class="d-flex align-items-center mb-4">
+                @if (Model.FotoPersonal != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.FotoPersonal);
+                    <img src="data:image/jpeg;base64,@base64"
+                         class="rounded-circle me-3"
+                         style="width:80px;height:80px;object-fit:cover;" />
+                }
+                else
+                {
+                    <i class="bi bi-person-circle fs-1 text-muted me-3"></i>
+                }
+
+                <div>
+                    <h5 class="mb-0">@Model.Nombre</h5>
+                    <small class="text-muted">
+                        @Model.Departamento | @Model.TipoEmpleado
+                    </small><br />
+                    <small class="text-muted">
+                        @Model.Email | @Model.Telefono
+                    </small>
+                </div>
+            </div>
+
+            <form id="formDiasVacaciones">
+
+                <input type="hidden" name="IdEmpleado" value="@Model.IdEmpleado" />
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Total de días hábiles</label>
+                        <input type="number"
+                               name="TotalDias"
+                               class="form-control"
+                               min="0"
+                               value="@Model.TotalDias" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Días usados</label>
+                        <input type="text"
+                               class="form-control"
+                               value="0"
+                               disabled />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Días restantes</label>
+                    <input type="text"
+                           class="form-control"
+                           value="@Model.TotalDias"
+                           disabled />
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- ================= FOOTER ================= -->
+        <div class="modal-footer">
+            <button class="btn btn-secondary"
+                    onclick="VacacionesDiasOverlay.close()">
+                Cancelar
+            </button>
+
+            <button class="btn btn-primary"
+                    onclick="VacacionesDiasOverlay.save()">
+                Guardar
+            </button>
+        </div>
+
+    </div>
+</div>

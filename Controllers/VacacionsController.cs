@@ -1,9 +1,11 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RecursosHumanos.Models;
+using RecursosHumanos.Models.ViewModels.Empleados;
 using RecursosHumanos.Models.ViewModels.Vacaciones;
 using System;
 using System.Collections.Generic;
@@ -393,34 +395,39 @@ namespace RecursosHumanos.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            // 1️⃣ Obtener Id del usuario desde la cookie
-            int usuarioId = int.Parse(
-                User.FindFirst(ClaimTypes.NameIdentifier)!.Value
-            );
+           
+            //1 Se crea el usuario con el VM cookies y lo que se guardo
+            EmpleadosCookiesValidationVM usuarioSesion = new EmpleadosCookiesValidationVM
+            {
+                IdPersonal = int.Parse(
+                User.FindFirst(ClaimTypes.NameIdentifier)!.Value),
+                NombreCompleto = User.FindFirst("NombreCompleto")?.Value ?? "",
+                Departamento = User.FindFirst("Departamento")?.Value ?? ""
+            };
 
-            // 2️⃣ Obtener usuario desde BD
-            var usuario = _context.Usuarios
-                .FirstOrDefault(u => u.Id == usuarioId);
+            // 2️ Traer catálogo desde BD
+            var razones = _context.Razones
+                .OrderBy(r => r.Razon)
+                .Select(r => new SelectListItem
+                {
+                    Value = r.Id.ToString(),          // 👈 ID real
+                    Text = r.Razon              // 👈 lo que ve el usuario
+                })
+                .ToList();
 
-            // 3️⃣ Crear el modelo
+
+
+            // 2 Crear el modelo
             var model = new VacacionCreateVM
             {
                 Nuevo = new Vacacion
                 {
                     // Autorellenado
-                    Nombre = usuario?.Usuario1,              // o usuario?.NombreCompleto
-                    Departamento = usuario?.Departamento     // puede ser null, no pasa nada
+                    Nombre = usuarioSesion.NombreCompleto.ToString(),              
+                    Departamento = usuarioSesion.Departamento    
                 },
 
-                Razones = Enum.GetValues(typeof(RazonVacaciones))
-                    .Cast<RazonVacaciones>()
-                    .Select(r => new SelectListItem
-                    {
-                        Value = ((int)r).ToString(),
-                        Text = r.ToString()
-                                .Replace("AsuntosPersonales", "Asuntos personales")
-                    })
-                    .ToList()
+                Razones = razones
             };
 
             return PartialView("_VacacionesCrearPartial", model);
@@ -437,6 +444,7 @@ namespace RecursosHumanos.Controllers
         {
             if (!ModelState.IsValid)
             {
+
                 foreach (var error in ModelState)
                 {
                     foreach (var e in error.Value.Errors)
@@ -453,9 +461,15 @@ namespace RecursosHumanos.Controllers
                 User.FindFirst(ClaimTypes.NameIdentifier)!.Value
                 );
 
-            //Se obtiene el nombre del usuario
 
-            string nombreCompleto = _context.Usuarios.FirstOrDefault(u => u.Id == usuarioId).Nombre.ToString();
+            /**/
+            //Se obtiene el nombre del usuario
+            string nombreCompleto = User.FindFirst("NombreCompleto")?.Value ?? "".ToString();
+
+            //Se obtiene el departamento del usuario
+            var Departamento = User.FindFirst("Departamento")?.Value ?? "".ToString();
+
+
 
             //Se agrega quien lo creo dependiendo de la sesion
             model.Nuevo.CreadoPor = usuarioId;
@@ -463,11 +477,15 @@ namespace RecursosHumanos.Controllers
             //Se agrega el nombre de quien lo crea:
             model.Nuevo.Nombre = nombreCompleto;
 
+
+            //Se guarda el departamento
+            model.Nuevo.Departamento = Departamento;
+
             model.Nuevo.FechaCreacion = DateTime.Now;
             _context.Vacacions.Add(model.Nuevo);
             await _context.SaveChangesAsync();
 
-            return Ok(); // ✅ devuelvo solo 200 OK
+            return Ok(); //  devuelvo solo 200 OK
          }
         #endregion
 
