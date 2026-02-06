@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RecursosHumanos.Models.ViewModels;
-using RecursosHumanos.Models.ViewModels.Empleados;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace RecursosHumanos.Models;
 
@@ -24,6 +22,12 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<CatalogoCurso> CatalogoCursos { get; set; }
 
     public virtual DbSet<CatalogoNivel> CatalogoNivels { get; set; }
+
+    public virtual DbSet<CatalogosDepartamento> CatalogosDepartamentos { get; set; }
+
+    public virtual DbSet<CatalogosEstado> CatalogosEstados { get; set; }
+
+    public virtual DbSet<CatalogosTipoEmpleado> CatalogosTipoEmpleados { get; set; }
 
     public virtual DbSet<Categorium> Categoria { get; set; }
 
@@ -66,11 +70,6 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<UsuarioEspejo> UsuarioEspejos { get; set; }
 
     public virtual DbSet<Vacacion> Vacacions { get; set; }
-
-    public DbSet<RazonTotal> RazonTotal { get; set; }
-
-    public DbSet<MesTotal> MestTotal { get; set; }
-
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=DefaultConnection");
@@ -150,6 +149,54 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.FechaCreacion)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<CatalogosDepartamento>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Catalogo__3214EC070EC465BA");
+
+            entity.ToTable("CatalogosDepartamento", "Empleados");
+
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<CatalogosEstado>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Catalogo__3214EC07BEE7AFEC");
+
+            entity.ToTable("CatalogosEstado", "Empleados");
+
+            entity.Property(e => e.FechaOrigen)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IdOrigen)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<CatalogosTipoEmpleado>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Catalogo__3214EC07157540F9");
+
+            entity.ToTable("CatalogosTipoEmpleado", "Empleados");
+
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IdOrigen)
+                .HasMaxLength(255)
+                .IsUnicode(false);
             entity.Property(e => e.Nombre)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -326,6 +373,9 @@ public partial class ApplicationDbContext : DbContext
 
             entity.Property(e => e.FechaCreacion)
                 .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.FechaExpiracion)
+                .HasDefaultValueSql("(dateadd(year,(1),getdate()))")
                 .HasColumnType("datetime");
         });
 
@@ -508,6 +558,9 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.Correo)
                 .HasMaxLength(255)
                 .HasColumnName("correo");
+            entity.Property(e => e.Departamento)
+                .HasMaxLength(1)
+                .IsUnicode(false);
             entity.Property(e => e.EsAdministrador).HasColumnName("es_administrador");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(255)
@@ -578,12 +631,6 @@ public partial class ApplicationDbContext : DbContext
                 .HasForeignKey(d => d.IdRazon)
                 .HasConstraintName("FK_RAZONES");
         });
-
-        // ===== DTO para Stored Procedures (Estadísticas) =====
-        modelBuilder.Entity<RazonTotal>().HasNoKey();
-        modelBuilder.Entity<MesTotal>().HasNoKey();
-
-
 
         OnModelCreatingPartial(modelBuilder);
     }

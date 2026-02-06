@@ -30,6 +30,10 @@ namespace RecursosHumanos.Models.ViewModels.Empleados
         public List<SelectListItem> TiposEmpleado { get; set; }
         public List<SelectListItem> Estados { get; set; }
 
+        public string EstadoOrigen { get; set; }
+        public string TipoEmpleadoOrigen { get; set; }
+
+
 
 
         // ===================== PAGINACIÓN =====================

@@ -12,21 +12,41 @@ public class EmpleadosController : Controller
     private readonly IConfiguration _configuration;
     private readonly ApplicationDbContext _context;
 
+
+    #region Builder
     public EmpleadosController(IConfiguration configuration, ApplicationDbContext context)
     {
         _configuration = configuration;
         _context = context;
     }
 
-    #region Index
+    private static readonly Dictionary<string, string> EstadoCodigoATexto =
+    new(StringComparer.OrdinalIgnoreCase)
+    {
+        { "A", "Activo" },
+        { "B", "Baja" }
+    };
 
-    // ===================== INDEX =====================
+    private static readonly Dictionary<string, string> TipoCodigoATexto =
+        new(StringComparer.OrdinalIgnoreCase)
+    {
+        { "C", "Empleado de Confianza" },
+        { "E", "Empleado" },
+        { "M", "Mecanico" },
+        { "O", "Operador" }
+    };
+
+    #endregion
+
+    //Vista principal: MasterList de sistema LIS + HR
+    #region Index
     [Authorize]
     public IActionResult Index(PersonalListadoVM filtro, int pagina = 1)
     {
         int pageSize = 10;
-        List<PersonalListadoVM> lista = new();
+        var lista = new List<PersonalListadoVM>();
 
+        // ===================== DATA =====================
         using (SqlConnection cn = new SqlConnection(
             _configuration.GetConnectionString("AlertasConnection")))
         {
@@ -42,32 +62,50 @@ public class EmpleadosController : Controller
                 {
                     IdPersonal = Convert.ToInt32(dr["id_personal"]),
                     FotoPersonal = dr["foto_personal"] as byte[],
-                    Nombre = dr["nombre"].ToString(),
-                    Departamento = dr["descripcion"].ToString(),
-                    TipoEmpleado = dr["tipo_empleado"].ToString(),
-                    Telefono = dr["telefono"].ToString(),
-                    Email = dr["email"].ToString(),
-                    Estado = dr["estado"].ToString()
+                    Nombre = dr["nombre"]?.ToString(),
+                    Departamento = dr["descripcion"]?.ToString(),
+                    TipoEmpleado = dr["tipo_empleado"]?.ToString(), // C / E / M / O
+                    Telefono = dr["telefono"]?.ToString(),
+                    Email = dr["email"]?.ToString(),
+                    Estado = dr["estado"]?.ToString() // A / B
                 });
             }
         }
 
-        // ===================== FILTROS =====================
-        if (!string.IsNullOrEmpty(filtro.FiltroNombre))
-            lista = lista.Where(x => x.Nombre.Contains(filtro.FiltroNombre)).ToList();
+        // ===================== FILTROS (LETRA) =====================
+        if (!string.IsNullOrWhiteSpace(filtro.FiltroNombre))
+        {
+            lista = lista
+                .Where(x => !string.IsNullOrWhiteSpace(x.Nombre) &&
+                            x.Nombre.Contains(filtro.FiltroNombre, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
 
-        if (!string.IsNullOrEmpty(filtro.FiltroDepartamento))
-            lista = lista.Where(x => x.Departamento == filtro.FiltroDepartamento).ToList();
+        if (!string.IsNullOrWhiteSpace(filtro.FiltroDepartamento))
+        {
+            lista = lista
+                .Where(x => x.Departamento == filtro.FiltroDepartamento)
+                .ToList();
+        }
 
-        if (!string.IsNullOrEmpty(filtro.FiltroTipoEmpleado))
-            lista = lista.Where(x => x.TipoEmpleado == filtro.FiltroTipoEmpleado).ToList();
+        if (!string.IsNullOrWhiteSpace(filtro.FiltroTipoEmpleado))
+        {
+            lista = lista
+                .Where(x => x.TipoEmpleado == filtro.FiltroTipoEmpleado)
+                .ToList();
+        }
 
-        if (!string.IsNullOrEmpty(filtro.FiltroEstado))
-            lista = lista.Where(x => x.Estado == filtro.FiltroEstado).ToList();
+        if (!string.IsNullOrWhiteSpace(filtro.FiltroEstado))
+        {
+            lista = lista
+                .Where(x => x.Estado == filtro.FiltroEstado)
+                .ToList();
+        }
 
-
+        // ===================== COMBOS =====================
         var departamentos = lista
             .Select(x => x.Departamento)
+            .Where(x => !string.IsNullOrWhiteSpace(x))
             .Distinct()
             .OrderBy(x => x)
             .Select(x => new SelectListItem
@@ -77,34 +115,23 @@ public class EmpleadosController : Controller
             })
             .ToList();
 
-        var tiposEmpleado = lista
-            .Select(x => x.TipoEmpleado)
-            .Distinct()
-            .OrderBy(x => x)
-            .Select(x => new SelectListItem
-            {
-                Text = x,
-                Value = x
-            })
-            .ToList();
+        var tiposEmpleado = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "C", Text = "Empleado de Confianza" },
+        new SelectListItem { Value = "E", Text = "Empleado" },
+        new SelectListItem { Value = "M", Text = "Mecánico" },
+        new SelectListItem { Value = "O", Text = "Operador" }
+    };
 
-        var estados = lista
-            .Select(x => x.Estado)
-            .Distinct()
-            .OrderBy(x => x)
-            .Select(x => new SelectListItem
-            {
-                Text = x,
-                Value = x
-            })
-            .ToList();
-
-
-
-
+        var estados = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "A", Text = "Activo" },
+        new SelectListItem { Value = "B", Text = "Baja" }
+    };
 
         // ===================== PAGINACIÓN =====================
         int totalRegistros = lista.Count;
+
         var datosPaginados = lista
             .Skip((pagina - 1) * pageSize)
             .Take(pageSize)
@@ -121,7 +148,6 @@ public class EmpleadosController : Controller
             FiltroTipoEmpleado = filtro.FiltroTipoEmpleado,
             FiltroEstado = filtro.FiltroEstado,
 
-
             Departamentos = departamentos,
             TiposEmpleado = tiposEmpleado,
             Estados = estados
@@ -129,8 +155,8 @@ public class EmpleadosController : Controller
 
         return View(vm);
     }
-    #endregion
 
+    #endregion
 
 
     //Vista Parcial de Resumen: Vacaciones, Incidentes, Portafolio
@@ -468,7 +494,6 @@ public class EmpleadosController : Controller
     }
     #endregion
 
-
     //Index Vacaciones
     #region Vacaciones
     [Authorize]
@@ -701,9 +726,6 @@ public class EmpleadosController : Controller
     #endregion
 
 
-
-
-
     //Vista de Incidentes:Crear nuevo
     #region CreatesIncidentes
 
@@ -917,8 +939,6 @@ public class EmpleadosController : Controller
     #endregion
 
 
-
-
     #region Edits
 
 
@@ -1006,7 +1026,6 @@ public class EmpleadosController : Controller
     #endregion
 
 
-
     //Vista de Portafolio:Eliminar
     #region DeletesPortafolio
 
@@ -1074,8 +1093,6 @@ public class EmpleadosController : Controller
     #endregion
 
     #endregion
-
-
 
 
     //Vista de Incidentes:Eliminar
@@ -1148,10 +1165,6 @@ public class EmpleadosController : Controller
     #endregion
 
 
-
-
-
-
     #region Details
     [Authorize]
     [HttpGet]
@@ -1179,8 +1192,6 @@ public class EmpleadosController : Controller
     }
 
     #endregion
-
-
 
 
     //Exportar a Excel
@@ -1316,6 +1327,7 @@ public class EmpleadosController : Controller
         );
     }
     #endregion
+
 
 
 

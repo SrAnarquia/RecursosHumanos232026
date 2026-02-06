@@ -20,7 +20,6 @@ wwwroot\js\ReclutamientoOverlayEdit.js
 wwwroot\js\site.js
 wwwroot\js\VacacionesDiasOverlay.js
 wwwroot\js\VacacionesOverlayAprobacion.js
-wwwroot\js\VacacionesOverlayCreate.js
 wwwroot\js\VacacionesOverlayDelete.js
 wwwroot\js\VacacionesOverlayRechazar.js
 wwwroot\js\_Layout.js
@@ -84,3 +83,4 @@ wwwroot\lib\jquery\LICENSE.txt
 wwwroot\UploadedFiles\24a35e97-5d49-463e-8e8d-4edd7e3a26e6.png
 wwwroot\UploadedFiles\35b791d3-411a-4dbc-b547-d2b8bc669379.jpeg
 wwwroot\UploadedFiles\ded17c31-e446-4edd-91e6-af53f6e9a38d.png
+wwwroot\js\VacacionesOverlayCreate.js

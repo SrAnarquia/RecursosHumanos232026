@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|c:\\users\\jonathan corpus\\desktop\\nuevos desarrollos\\desarrollos\\visual studio\\recursoshumanos04022026\\recursoshumanos232026\\controllers\\cuentacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|solutionrelative:controllers\\cuentacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|c:\\users\\jonathan corpus\\desktop\\nuevos desarrollos\\desarrollos\\visual studio\\recursoshumanos04022026\\recursoshumanos232026\\wwwroot\\js\\vacacionesoverlaycreate.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|solutionrelative:wwwroot\\js\\vacacionesoverlaycreate.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|c:\\users\\jonathan corpus\\desktop\\nuevos desarrollos\\desarrollos\\visual studio\\recursoshumanos04022026\\recursoshumanos232026\\controllers\\empleadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|solutionrelative:controllers\\empleadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|c:\\users\\jonathan corpus\\desktop\\nuevos desarrollos\\desarrollos\\visual studio\\recursoshumanos04022026\\recursoshumanos232026\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|c:\\users\\jonathan corpus\\desktop\\nuevos desarrollos\\desarrollos\\visual studio\\recursoshumanos04022026\\recursoshumanos232026\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|c:\\users\\jonathan corpus\\desktop\\nuevos desarrollos\\desarrollos\\visual studio\\recursoshumanos04022026\\recursoshumanos232026\\controllers\\vacacionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73598716-5CD1-B9B7-BD12-0AA383AC7C83}|RecursosHumanos.csproj|solutionrelative:controllers\\vacacionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,56 +18,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CuentaController.cs",
-              "DocumentMoniker": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\Controllers\\CuentaController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CuentaController.cs",
-              "ToolTip": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\Controllers\\CuentaController.cs",
-              "RelativeToolTip": "Controllers\\CuentaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "VacacionsController.cs",
+              "DocumentMoniker": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\Controllers\\VacacionsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\VacacionsController.cs",
+              "ToolTip": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\Controllers\\VacacionsController.cs",
+              "RelativeToolTip": "Controllers\\VacacionsController.cs",
+              "ViewState": "AgIAANABAAAAAAAAAIAwwOABAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T22:36:49.537Z",
+              "WhenOpened": "2026-02-06T22:20:02.64Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAADEAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-02-04T22:16:01.913Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EmpleadosController.cs",
-              "DocumentMoniker": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\Controllers\\EmpleadosController.cs",
-              "RelativeDocumentMoniker": "Controllers\\EmpleadosController.cs",
-              "ToolTip": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\Controllers\\EmpleadosController.cs",
-              "RelativeToolTip": "Controllers\\EmpleadosController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T19:21:37.372Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-04T19:21:09.715Z"
+              "DocumentIndex": 0,
+              "Title": "VacacionesOverlayCreate.js",
+              "DocumentMoniker": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\wwwroot\\js\\VacacionesOverlayCreate.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\VacacionesOverlayCreate.js",
+              "ToolTip": "C:\\Users\\Jonathan Corpus\\Desktop\\Nuevos Desarrollos\\Desarrollos\\Visual Studio\\RecursosHumanos04022026\\RecursosHumanos232026\\wwwroot\\js\\VacacionesOverlayCreate.js",
+              "RelativeToolTip": "wwwroot\\js\\VacacionesOverlayCreate.js",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAowBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-02-06T23:06:30.088Z",
+              "EditorCaption": ""
             }
           ]
         }

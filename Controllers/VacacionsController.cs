@@ -18,6 +18,8 @@ namespace RecursosHumanos.Controllers
 {
     public class VacacionsController : Controller
     {
+        //Constructor de la clase
+        #region Builder
         private readonly ApplicationDbContext _context;
 
         public VacacionsController(ApplicationDbContext context)
@@ -25,7 +27,9 @@ namespace RecursosHumanos.Controllers
             _context = context;
         }
 
+        #endregion
 
+        //Vacaciones Solicitudes Index
         #region Index
 
         [Authorize]
@@ -80,6 +84,7 @@ namespace RecursosHumanos.Controllers
         }
         #endregion
 
+        //Aprobaciones Solicitudes Index
         #region Aprobaciones
 
         [Authorize]
@@ -189,7 +194,7 @@ namespace RecursosHumanos.Controllers
 
         #endregion
 
-
+        //Eliminar registro parcial Solicitudes
         #region DeletesPartial
 
 
@@ -241,6 +246,8 @@ namespace RecursosHumanos.Controllers
         #endregion
         #endregion
 
+
+        //Aprobar solicitud Aprobaciones
         #region AprobarVista
 
 
@@ -310,7 +317,7 @@ namespace RecursosHumanos.Controllers
 
         #endregion
 
-
+        //Rechazar solicitud Aprobcaciones
         #region RechazarVista
 
         #region rechazarGet
@@ -388,6 +395,7 @@ namespace RecursosHumanos.Controllers
 
         #endregion
 
+        //Crear vacaciones Parcial Solicitudes
         #region CreatesPartial
 
         #region CreatePartialGet
@@ -396,6 +404,7 @@ namespace RecursosHumanos.Controllers
         public IActionResult Create()
         {
            
+
             //1 Se crea el usuario con el VM cookies y lo que se guardo
             EmpleadosCookiesValidationVM usuarioSesion = new EmpleadosCookiesValidationVM
             {
@@ -461,8 +470,16 @@ namespace RecursosHumanos.Controllers
                 User.FindFirst(ClaimTypes.NameIdentifier)!.Value
                 );
 
+            //Se verifica el usuario tenga vacaciones disponibles
 
-            /**/
+            bool esValido = await ValidarDiasVacacionesAsync(usuarioId,model.Nuevo.FechaInicio.Value,model.Nuevo.FechaFinalizacion.Value,model);
+
+            if (!esValido)
+            {
+                return PartialView("_VacacionesCrearPartial", model);
+            }
+
+
             //Se obtiene el nombre del usuario
             string nombreCompleto = User.FindFirst("NombreCompleto")?.Value ?? "".ToString();
 
@@ -601,7 +618,7 @@ namespace RecursosHumanos.Controllers
         #endregion
 
 
-
+        //Exportar datos Solicitudes Index
         #region ExportToExcel
 
         //Tipo De vista
@@ -713,11 +730,39 @@ namespace RecursosHumanos.Controllers
 
 
 
-        #endregion 
+        #endregion
+
+        //Verificar antes de crear solicitud
+        #region ValidarVacaciones
+        private async Task<bool> ValidarDiasVacacionesAsync(int usuarioId,DateTime fechaInicio,DateTime fechaFin,VacacionCreateVM model)
+        {
+            var diasEmpleado = await _context.DiasEmpleados
+                .FirstOrDefaultAsync(d => d.IdEmpleado == usuarioId);
+
+            if (diasEmpleado == null)
+            {
+                ModelState.AddModelError("", "No tienes días de vacaciones asignados.");
+                return false;
+            }
+
+            int diasDisponibles = diasEmpleado.DiasRestantes ?? 0;
+
+            int diasSolicitados = (fechaFin.Date - fechaInicio.Date).Days + 1;
+
+            if (diasSolicitados > diasDisponibles)
+            {
+                ModelState.AddModelError("", "No tienes suficientes días de vacaciones disponibles.");
+                return false;
+            }
+
+            return true;
+        }
 
 
+        #endregion
 
 
+        //No se usa de momento 06/02/2026
         #region ExistData
 
         [Authorize]

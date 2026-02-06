@@ -21,4 +21,5 @@ public partial class Usuario
 
     public string? Departamento { get; set; }
 
+    public int? IdZam { get; set; }
 }

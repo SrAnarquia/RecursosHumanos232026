@@ -12,12 +12,14 @@
     gap: 12px;
 }
 
-    .filters input {
+    .filters input,
+    .filters select {
         min-width: 180px;
         padding: 6px 10px;
         border-radius: 6px;
         border: 1px solid #cbd5e1;
     }
+
 
 /* =============================== ACCIONES =============================== */
 .actions a {

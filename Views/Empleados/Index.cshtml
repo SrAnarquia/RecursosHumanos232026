@@ -28,17 +28,39 @@
                value="@Model.FiltroNombre"
                placeholder="Nombre" />
 
-        <input type="text" name="FiltroDepartamento"
-               value="@Model.FiltroDepartamento"
-               placeholder="Departamento" />
+        <!-- DEPARTAMENTO -->
+        <select name="FiltroDepartamento">
+            <option value="" disabled selected hidden>Departamento</option>
+            @foreach (var item in Model.Departamentos)
+            {
+                <option value="@item.Value" selected="@(item.Value == Model.FiltroDepartamento)">
+                    @item.Text
+                </option>
+            }
+        </select>
 
-        <input type="text" name="FiltroTipoEmpleado"
-               value="@Model.FiltroTipoEmpleado"
-               placeholder="Tipo empleado" />
+        <!-- TIPO EMPLEADO -->
+        <select name="FiltroTipoEmpleado">
+            <option value="" disabled selected hidden>Tipo de Empleado</option>
+            @foreach (var item in Model.TiposEmpleado)
+            {
+                <option value="@item.Value" selected="@(item.Value == Model.FiltroTipoEmpleado)">
+                    @item.Text
+                </option>
+            }
+        </select>
 
-        <input type="text" name="FiltroEstado"
-               value="@Model.FiltroEstado"
-               placeholder="Estado" />
+        <!-- ESTADO -->
+        <select name="FiltroEstado">
+            <option value="" disabled selected hidden>Estado</option>
+            @foreach (var item in Model.Estados)
+            {
+                <option value="@item.Value" selected="@(item.Value == Model.FiltroEstado)">
+                    @item.Text
+                </option>
+            }
+        </select>
+
 
         <button type="submit" class="btn btn-primary">
             <i class="bi bi-search"></i> Filtrar

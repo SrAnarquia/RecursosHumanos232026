@@ -1826,10 +1826,10 @@ C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\Re
 C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\swae.build.ex.cache
-C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\Recursos.B20A225E.Up2Date
 C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\RecursosHumanos.dll
 C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\refint\RecursosHumanos.dll
 C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\RecursosHumanos.pdb
 C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\RecursosHumanos.genruntimeconfig.cache
 C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\ref\RecursosHumanos.dll
+C:\Users\Jonathan Corpus\Desktop\Nuevos Desarrollos\Desarrollos\Visual Studio\RecursosHumanos04022026\RecursosHumanos232026\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

@@ -16,8 +16,15 @@
         <form id="formCrearVacacion" asp-action="Create" method="post">
             @Html.AntiForgeryToken()
 
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
+            <div asp-validation-summary="ModelOnly"
+                 class="border-start border-3 border-danger ps-3 py-2 mb-3 text-danger small d-flex align-items-center gap-2">
+                <i class="bi bi-info-circle"></i>
+                <span>¡Error!</span>
+            </div>
+            <!--
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            -->
             <div class="row g-3">
                 <div class="col-md-6">
                     <label asp-for="Nuevo.Nombre"></label>

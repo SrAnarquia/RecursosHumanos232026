@@ -14,4 +14,8 @@ public partial class DiasEmpleado
     public int? DiasUsados { get; set; }
 
     public DateTime? FechaCreacion { get; set; }
+
+    public int? DiasRestantes { get; set; }
+
+    public DateTime? FechaExpiracion { get; set; }
 }
